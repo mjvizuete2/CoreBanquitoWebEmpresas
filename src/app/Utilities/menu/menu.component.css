@@ -1,0 +1,50 @@
+.navbar {
+    width: 250px;
+    border: 1px solid #ccc; /* Añade un borde sólido de 1px con color gris */
+    border-radius: 10px;
+  }
+  
+  .nav-item {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .dropdown-menu {
+    width: 100%;
+    background-color: #f8f9fa; /* Mismo color de fondo que el menú */
+    border: none; /* Elimina el borde */
+  }
+  
+  /* .dropdown-item {
+    width: 100%;
+    padding: 0.5rem 1rem; 
+    color: #212529; 
+  } */
+  
+  .dropdown-item:hover, .dropdown-item:focus {
+    background-color: #e9ecef; /* Color de fondo al pasar el ratón */
+    color: #212529;
+  }
+  
+  .nav-link.active {
+    background-color: #e9ecef;
+  }
+  
+  .nav-link, .dropdown-item {
+    border-radius: 0; /* Sin bordes redondeados */
+    text-align: left; /* Alinea el texto a la izquierda */
+    padding-left: 15px; /* Añade un padding a la izquierda */
+  }
+  
+  .navbar-toggler {
+    align-self: flex-end; /* Alinea el botón del toggler a la derecha */
+  }
+  
+  .dropdown-divider {
+    margin: 0; /* Quita el margen de los divisores */
+  }
+  
+  .show > .dropdown-menu {
+    display: block;
+  }
+  
