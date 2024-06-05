@@ -10,6 +10,7 @@ import { RegistroComponent } from './Pages/registro/registro.component';
 import { RecuperaContraComponent } from './Pages/recupera-contra/recupera-contra.component';
 import { MenuComponent } from './Utilities/menu/menu.component';
 import { PosicionConsolidadaComponent } from './Pages/posicion-consolidada/posicion-consolidada.component';
+import { CuentasComponent } from './Pages/cuentas/cuentas.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PosicionConsolidadaComponent } from './Pages/posicion-consolidada/posic
     RegistroComponent,
     RecuperaContraComponent,
     MenuComponent,
-    PosicionConsolidadaComponent
+    PosicionConsolidadaComponent,
+    CuentasComponent
   ],
   imports: [
     BrowserModule,

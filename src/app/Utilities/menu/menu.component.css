@@ -11,8 +11,7 @@
   
   .dropdown-menu {
     width: 100%;
-    background-color: #f8f9fa; /* Mismo color de fondo que el menú */
-    border: none; /* Elimina el borde */
+    border: none; 
   }
   
   /* .dropdown-item {
