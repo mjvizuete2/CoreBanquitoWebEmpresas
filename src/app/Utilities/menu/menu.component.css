@@ -1,61 +1,19 @@
-.navbar {
-    width: 250px;
-    border: 1px solid #ccc; /* Añade un borde sólido de 1px con color gris */
-    border-radius: 10px;
-  }
-  
-  .nav-item {
-    width: 100%;
-    padding: 20px;
-  }
-  
-  .dropdown-menu {
-    width: 100%;
-    border: none; 
-  }
-  
-  /* .dropdown-item {
-    width: 100%;
-    padding: 0.5rem 1rem; 
-    color: #212529; 
-  } */
-  
-  .dropdown-item:hover, .dropdown-item:focus {
-    background-color: #e9ecef; /* Color de fondo al pasar el ratón */
-    color: #212529;
-  }
-  
-  .nav-link.active {
-    background-color: #e9ecef;
-  }
-  
-  .nav-link, .dropdown-item {
-    border-radius: 0; /* Sin bordes redondeados */
-    text-align: left; /* Alinea el texto a la izquierda */
-    padding-left: 15px; /* Añade un padding a la izquierda */
-  }
-  
-  .navbar-toggler {
-    align-self: flex-end; /* Alinea el botón del toggler a la derecha */
-  }
-  
-  .dropdown-divider {
-    margin: 0; /* Quita el margen de los divisores */
-  }
-  
-  .show > .dropdown-menu {
-    display: block;
-  }
-  
-  .dropdown-menu.show {
-    display: block;
-  }
-  
-  
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-.navbar-nav .dropdown-menu {
-  position: static;
-  float: none;
+.full-height {
+  height: 100%;
+}
+
+.navbar.full-height {
+  height: 100%;
+}
+
+.collapse.full-height {
+  height: 100%;
 }
 
 .dropdown-menu {
@@ -64,15 +22,20 @@
   word-wrap: break-word; /* Permite que las palabras largas se partan para ajustarse */
 }
 
+.nav-item {
+  width: 100%;
+  padding: 20px;
+}
+
+
 .dropdown-item {
   white-space: normal; /* Permite el salto de línea dentro del elemento */
   word-wrap: break-word; /* Permite que las palabras largas se partan para ajustarse */
   max-width: 100%; /* Asegura que el texto no se salga del contenedor */
 }
 
-@media (max-width: 991.98px) {
-  .dropdown-menu {
-    position: relative;
-    width: 100%;
-  }
+
+/* Custom style for the navbar toggler icon */
+.custom-toggler .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='yellow' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }

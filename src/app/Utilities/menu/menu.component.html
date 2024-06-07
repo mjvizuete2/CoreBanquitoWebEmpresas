@@ -1,10 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-light flex-column align-items-start">
-    <a class="navbar-brand" href="#">Mis productos</a>
+<nav class="navbar navbar-expand-lg navbar-light flex-column align-items-start full-height">
+    <img src="assets/logo-Banquito.png" class="img-fluid" style="max-height: 100px; margin-bottom: 20px;">
+    <p class="navbar-brand" >Mis productos</p>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse full-height" id="navbarNav">
         <ul class="navbar-nav flex-column w-100">
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" [routerLink]="['/posicionConsolidada']">Posición consolidada</a>
@@ -22,7 +23,7 @@
                     Opciones
                 </a>
                 <ul class="dropdown-menu custom-dropdown-menu w-100" aria-labelledby="navbarDropdown2">
-                    <li><a class="dropdown-item" href="#">Activación de cobros y recaudos</a></li>
+                    <li><a class="dropdown-item" >Activación de cobros y recaudos</a></li>
                 </ul>
             </li>
             <li class="nav-item dropdown">
@@ -59,6 +60,9 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Deshabilitado</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" tabindex="-1" aria-disabled="true" style="margin-top: 30px;">Cerrar sesión</a>
             </li>
         </ul>
     </div>
