@@ -47,3 +47,32 @@
     display: block;
   }
   
+  .dropdown-menu.show {
+    display: block;
+  }
+  
+  
+
+.navbar-nav .dropdown-menu {
+  position: static;
+  float: none;
+}
+
+.dropdown-menu {
+  width: 100%;
+  white-space: normal; /* Permite el salto de línea dentro del elemento */
+  word-wrap: break-word; /* Permite que las palabras largas se partan para ajustarse */
+}
+
+.dropdown-item {
+  white-space: normal; /* Permite el salto de línea dentro del elemento */
+  word-wrap: break-word; /* Permite que las palabras largas se partan para ajustarse */
+  max-width: 100%; /* Asegura que el texto no se salga del contenedor */
+}
+
+@media (max-width: 991.98px) {
+  .dropdown-menu {
+    position: relative;
+    width: 100%;
+  }
+}

@@ -1,0 +1,56 @@
+.background-color {
+    background-color: #03B5CF;
+  }
+  
+.button-color{
+    background-color: #FCBE18;
+    color: black;
+    border-color:#FCBE18;
+}
+.button-color-second{
+    background-color: #BFE7ED;
+    color: black;
+    border-color: #BFE7ED;
+}
+
+
+.form-group{
+    margin-bottom: 50px;
+}
+
+#label{
+    margin-bottom: 20px;
+}
+
+.custom-invalid-feedback {
+    color: white;
+}
+
+
+#title{
+    background-color: #03B5CF;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+.full-height {
+    height: 100%;
+}
+.container-fluid {
+    display: flex;
+    height: 100%;
+}
+.menu {
+    flex: 0 0 25%; /* Ajusta el tamaño del menú según sea necesario */
+}
+.content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card.custom-card-background {
+    width: 100%;
+}

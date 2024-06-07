@@ -1,31 +1,29 @@
-<div class="container">
-    <div class="row vh-100">
-        <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
-            <h2 class="mb-4">RECUPERACIÓN DE CONTRASEÑA</h2>
-            <img src="assets/logo-Banquito.png" class="img-fluid" style="max-height: 500px;">
-        </div>
-        <div class="col-md-6 d-flex align-items-center justify-content-center">
-            <div class="card mt-5 custom-card-background background-color" style="width: 100%; padding:50px ">
-                <div class="card-head">
-                    <h3>¿No recuerda su contraseña?</h3>
-                    <p>Ingrese su nombre de usuario y solicite el código de seguridad, el cual será enviado al correo electrónico que se registró en Banca Electrónica para Empresas.</p>
-                </div>
-                <div class="card-body">
-                    <form [formGroup]="recuperaForm" (ngSubmit)="onSubmit()">
-                        <div class="form-group">
-                            <label id="label" for="usuario">Nombre de usuario</label>
-                            <input type="text" id="usuario" formControlName="usuario" class="form-control"
-                                [ngClass]="{'is-invalid': submitted && f['usuario'].errors}" />
-                            <div *ngIf="submitted && f['usuario'].errors"
-                                class="invalid-feedback custom-invalid-feedback">
-                                <div *ngIf="f['usuario'].errors['required']">El nombre de usuario es requerido</div>
-                            </div>
+<div class="row vh-100">
+    <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
+        <h2 class="mb-4">RECUPERACIÓN DE CONTRASEÑA</h2>
+        <img src="assets/logo-Banquito.png" class="img-fluid" style="max-height: 500px;">
+    </div>
+    <div class="col-md-6 d-flex align-items-center justify-content-center">
+        <div class="card mt-5 custom-card-background background-color" style="width: 100%; padding:50px ">
+            <div class="card-head">
+                <h3>¿No recuerda su contraseña?</h3>
+                <p>Ingrese su nombre de usuario y solicite el código de seguridad, el cual será enviado al correo
+                    electrónico que se registró en Banca Electrónica para Empresas.</p>
+            </div>
+            <div class="card-body">
+                <form [formGroup]="recuperaForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label id="label" for="usuario">Nombre de usuario</label>
+                        <input type="text" id="usuario" formControlName="usuario" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && f['usuario'].errors}" />
+                        <div *ngIf="submitted && f['usuario'].errors" class="invalid-feedback custom-invalid-feedback">
+                            <div *ngIf="f['usuario'].errors['required']">El nombre de usuario es requerido</div>
                         </div>
-                        <div class="d-flex flex-column align-items-center w-100">
-                            <button type="submit" class="btn btn-primary mt-3 w-100 button-color">Solicitar código</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                    <div class="d-flex flex-column align-items-center w-100">
+                        <button type="submit" class="btn btn-primary mt-3 w-100 button-color">Solicitar código</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

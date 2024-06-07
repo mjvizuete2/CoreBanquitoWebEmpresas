@@ -1,0 +1,79 @@
+<div class="container-fluid">
+    <div class="menu d-flex flex-column align-items-center">
+        <img src="assets/logo-Banquito.png" class="img-fluid" style="max-height: 100px;">
+        <app-menu></app-menu>
+    </div>
+    <div class="content d-flex align-items-center justify-content-center" style="min-height: 100vh;">
+        <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
+            <h3 class="text-center">ORDEN COBROS</h3>
+            <div class="col-md-12 d-flex align-items-center justify-content-center">
+                <div class="card mt-5 custom-card-background background-color" style="width: 100%; padding:50px ">
+                    <div class="card-body">
+                        <form [formGroup]="cobroForm" (ngSubmit)="onSubmit()">
+                            <div class="d-flex justify-content-between">
+                                <div class="form-group me-2" style="flex: 1;">
+                                    <label id="label" for="usuario">Referencia</label>
+                                    <input type="text" id="usuario" formControlName="usuario" class="form-control"
+                                        [ngClass]="{'is-invalid': submitted && f['usuario'].errors}" />
+                                    <div *ngIf="submitted && f['usuario'].errors"
+                                        class="invalid-feedback custom-invalid-feedback">
+                                        <div *ngIf="f['usuario'].errors['required']">El usuario es requerido</div>
+                                    </div>
+                                </div>
+                                <div class="form-group ms-2" style="flex: 1;">
+                                    <label id="label" for="password">Cuenta a acreditar</label>
+                                    <input type="password" id="password" formControlName="password" class="form-control"
+                                        [ngClass]="{'is-invalid': submitted && f['password'].errors}" />
+                                    <div *ngIf="submitted && f['password'].errors"
+                                        class="invalid-feedback custom-invalid-feedback">
+                                        <div *ngIf="f['password'].errors['required']">La contraseña es requerida</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="form-group ms-2" style="flex: 1;">
+                                    <label id="label" for="password">Fecha de inicio</label>
+                                    <input type="password" id="password" formControlName="password" class="form-control"
+                                        [ngClass]="{'is-invalid': submitted && f['password'].errors}" />
+                                    <div *ngIf="submitted && f['password'].errors"
+                                        class="invalid-feedback custom-invalid-feedback">
+                                        <div *ngIf="f['password'].errors['required']">La contraseña es requerida</div>
+                                    </div>
+                                </div>
+                                <div class="form-group ms-2" style="flex: 1;">
+                                    <label id="label" for="password">Fecha de vencimiento</label>
+                                    <input type="password" id="password" formControlName="password" class="form-control"
+                                        [ngClass]="{'is-invalid': submitted && f['password'].errors}" />
+                                    <div *ngIf="submitted && f['password'].errors"
+                                        class="invalid-feedback custom-invalid-feedback">
+                                        <div *ngIf="f['password'].errors['required']">La contraseña es requerida</div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="form-group ms-2" style="flex: 1;">
+                                    <label id="label" for="password">Frecuencia de cobro</label>
+                                    <input type="password" id="password" formControlName="password" class="form-control"
+                                        [ngClass]="{'is-invalid': submitted && f['password'].errors}" />
+                                    <div *ngIf="submitted && f['password'].errors"
+                                        class="invalid-feedback custom-invalid-feedback">
+                                        <div *ngIf="f['password'].errors['required']">La contraseña es requerida</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-flex flex-column align-items-center w-100">
+                                <button type="submit" class="btn btn-primary mt-3 w-100 button-color">Cargar archivo</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+</div>
+
