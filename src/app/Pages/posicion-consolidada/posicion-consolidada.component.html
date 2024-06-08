@@ -11,12 +11,14 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav flex-column w-100">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         Cuentas
                                     </a>
                                     <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item">XXXXXX</a></li>
-                                        <li><a class="dropdown-item">YYYYYYY</a></li>
+                                        <li *ngFor="let numero of cuentas">
+                                            <a class="dropdown-item">{{ numero }}</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>

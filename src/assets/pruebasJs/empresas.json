@@ -1,0 +1,13 @@
+{
+    "status": "success",
+    "code": "110API",
+    "count": 1,
+    "data": {
+      "banco": [
+        {
+          "empresa": "BancoBanquito"
+        }
+      ]
+    }
+  }
+  

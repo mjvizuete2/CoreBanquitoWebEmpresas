@@ -15,8 +15,15 @@ export class OrdenRecaudoComponent {
 
   ngOnInit(): void {
     this.recaudoForm = this.formBuilder.group({
-      usuario: ['', Validators.required],
-      password: ['', Validators.required]
+      nombres: ['', Validators.required],
+      cedula: ['', Validators.required],
+      nContrato: ['', Validators.required],
+      monto: ['', Validators.required],
+      fechaInicio: ['', Validators.required],
+      fechaVencimiento: ['', Validators.required],
+      cuentaAcreditar: ['', Validators.required],
+      contrapartida: ['', Validators.required],
+      descripcion: ['', Validators.required]
     });
   }
 

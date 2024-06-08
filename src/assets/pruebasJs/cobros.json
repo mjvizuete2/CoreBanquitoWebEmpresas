@@ -1,0 +1,51 @@
+{
+    "status": "success",
+    "code": "110API",
+    "count": 1,
+    "data": {
+      "cobros": [
+        {
+          "referencia": "00001",
+          "nombreCliente": "Juan Carlos",
+          "tipoId": "cedula",
+          "identificacion": "17111111",
+          "cuentaCliente": "xxxxxxxx",
+          "monto": "00,00",
+          "fechaInicio": "01-01-2001",
+          "fechaVencimiento": "01-01-2002",
+          "cuentaAcreditar": "aaaaaaa",
+          "tipo": "total",
+          "frecuencia": "mensual",
+          "cancelado": "88.99"
+        },
+        {
+            "referencia": "00002",
+            "nombreCliente": "Carlos Perez",
+            "tipoId": "cedula",
+            "identificacion": "1788888888",
+            "cuentaCliente": "yyyyyyyy",
+            "monto": "00,00",
+            "fechaInicio": "01-01-2001",
+            "fechaVencimiento": "01-01-2001",
+            "cuentaAcreditar": "aaaaaaa",
+            "tipo": "total",
+            "frecuencia": "mensual",
+            "cancelado": "88.99"
+        },
+        {
+            "referencia": "00002",
+            "nombreCliente": "Carlos Perez",
+            "tipoId": "cedula",
+            "identificacion": "1788888888",
+            "cuentaCliente": "yyyyyyyy",
+            "monto": "00,00",
+            "fechaInicio": "01-01-2001",
+            "fechaVencimiento": "01-01-2001",
+            "cuentaAcreditar": "aaaaaaa",
+            "tipo": "total",
+            "frecuencia": "mensual",
+            "cancelado": "88.99"
+        }
+      ]
+    }
+  }

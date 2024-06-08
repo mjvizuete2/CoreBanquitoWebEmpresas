@@ -11,7 +11,8 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav flex-column w-100">
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
                                         Rango de fechas
                                     </a>
                                     <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
@@ -33,6 +34,8 @@
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="card custom-card-background" style="padding: 20px;">
+
+
                         <table class="table">
                             <thead>
                                 <tr>
@@ -44,17 +47,28 @@
                                     <th scope="col" id="title">Monto</th>
                                     <th scope="col" id="title">Fecha de inicio</th>
                                     <th scope="col" id="title">Fecha de vencimiento</th>
+                                    <th scope="col" id="title">Cuenta a acreditar</th>
+                                    <th scope="col" id="title">Tipo</th>
+                                    <th scope="col" id="title">Frecuencia</th>
+                                    <th scope="col" id="title">Cancelado</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">xxxxxxxxx</th>
-                                    <td>Ahorros</td>
-                                    <td>12/02/2024</td>
-                                    <td>Activo</td>
-                                    <td>0,00</td>
-                                    <td>0,00</td>
+                                <tr *ngFor="let cobro of cobros">
+                                  <td>{{ cobro.referencia }}</td>
+                                  <td>{{ cobro.nombreCliente }}</td>
+                                  <td>{{ cobro.tipoId }}</td>
+                                  <td>{{ cobro.identificacion }}</td>
+                                  <td>{{ cobro.cuentaCliente }}</td>
+                                  <td>{{ cobro.monto }}</td>
+                                  <td>{{ cobro.fechaInicio }}</td>
+                                  <td>{{ cobro.fechaVencimiento }}</td>
+                                  <td>{{ cobro.cuentaAcreditar }}</td>
+                                  <td>{{ cobro.tipo }}</td>
+                                  <td>{{ cobro.frecuencia }}</td>
+                                  <td>{{ cobro.cancelado }}</td>
+
                                 </tr>
                             </tbody>
                         </table>

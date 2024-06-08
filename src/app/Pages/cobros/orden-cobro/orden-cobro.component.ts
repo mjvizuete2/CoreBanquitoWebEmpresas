@@ -17,7 +17,10 @@ export class OrdenCobroComponent {
   ngOnInit(): void {
     this.cobroForm = this.formBuilder.group({
       usuario: ['', Validators.required],
-      password: ['', Validators.required]
+      cuentaAcreditar: ['', Validators.required],
+      fechaInicio: ['', Validators.required],
+      fechaVencimiento: ['', Validators.required],
+      frecuencia: ['', Validators.required]
     });
   }
 

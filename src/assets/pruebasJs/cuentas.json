@@ -1,0 +1,19 @@
+{
+    "status": "success",
+    "code": "110API",
+    "count": 2,
+    "data": {
+      "cuentas": [
+        {
+          "numero": "1111111"
+        },
+        {
+          "numero": "222222"
+        },
+        {
+          "numero": "333333333"
+        }
+      ]
+    }
+  }
+  
