@@ -14,12 +14,12 @@
                         <form [formGroup]="cobroForm" (ngSubmit)="onSubmit()">
                             <div class="d-flex justify-content-between">
                                 <div class="form-group me-2" style="flex: 1;">
-                                    <label id="label" for="usuario">Referencia</label>
-                                    <input type="text" id="usuario" formControlName="usuario" class="form-control"
-                                        [ngClass]="{'is-invalid': submitted && f['usuario'].errors}" />
-                                    <div *ngIf="submitted && f['usuario'].errors"
+                                    <label id="label" for="referencia">Referencia</label>
+                                    <input type="text" id="referencia" formControlName="referencia" class="form-control"
+                                        [ngClass]="{'is-invalid': submitted && f['referencia'].errors}" />
+                                    <div *ngIf="submitted && f['referencia'].errors"
                                         class="invalid-feedback custom-invalid-feedback">
-                                        <div *ngIf="f['usuario'].errors['required']">La referencia es requerido</div>
+                                        <div *ngIf="f['referencia'].errors['required']">La referencia es requerida</div>
                                     </div>
                                 </div>
                                 <div class="form-group ms-2" style="flex: 1;">
@@ -55,12 +55,12 @@
                                         [ngClass]="{'is-invalid': submitted && f['fechaVencimiento'].errors}" />
                                     <div *ngIf="submitted && f['fechaVencimiento'].errors"
                                         class="invalid-feedback custom-invalid-feedback">
-                                        <div *ngIf="f['fechaVencimiento'].errors['required']">La fecha de inicio es
+                                        <div *ngIf="f['fechaVencimiento'].errors['required']">La fecha de vencimiento es
                                             requerida</div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <!-- <div class="d-flex justify-content-between">
                                 <div class="form-group ms-2" style="flex: 1;">
                                     <label id="label" for="frecuencia">Frecuencia de cobro</label>
                                     <input type="frecuencia" id="frecuencia" formControlName="frecuencia"
@@ -72,10 +72,21 @@
                                             requerida</div>
                                     </div>
                                 </div>
+                            </div> -->
+                            <div class="form-group ms-2" style="flex: 1;">
+                                <label id="label" for="file">Fecha de vencimiento</label>
+                                <input type="file" id="file" formControlName="file" class="form-control" (change)="onFileSelected($event)" [ngClass]="{'is-invalid': submitted && f['file'].errors}" >
+
+                                <div *ngIf="submitted && f['file'].errors"
+                                    class="invalid-feedback custom-invalid-feedback">
+                                    <div *ngIf="f['file'].errors['required']">La fecha de vencimiento es
+                                        requerida</div>
+                                </div>
                             </div>
+                                     
+
                             <div class="d-flex flex-column align-items-center w-100">
-                                <button type="submit" class="btn btn-primary mt-3 w-100 button-color">Cargar
-                                    archivo</button>
+                                <button type="submit" class="btn btn-primary mt-3 w-100 button-color">Procesar</button>
                             </div>
                         </form>
                     </div>

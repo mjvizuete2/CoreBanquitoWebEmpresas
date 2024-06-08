@@ -10,35 +10,28 @@
             <h3 class="text-center">POSICIÓN CONSOLIDADA</h3>
             <div class="row">
                 <div class="col-md-6">
-                    <nav class="navbar navbar-expand-lg navbar-light  flex-column align-items-start">
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav flex-column w-100">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Cuentas
-                                    </a>
-                                    <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
-                                        <li *ngFor="let numero of cuentas">
-                                            <a class="dropdown-item">{{ numero }}</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                    <form [formGroup]="posForm" (ngSubmit)="onSubmit()" class="d-flex">
+                        <div class="form-group flex-grow-1">
+                            <select id="cuentas" formControlName="cuentas" class="form-control" [ngClass]="{'is-invalid': submitted && f['cuentas'].errors}">
+                                <option value="">Selecciona una cuenta</option>
+                                <option *ngFor="let cuenta of cuentas" [value]="cuenta">{{ cuenta }}</option>
+                            </select>
+                            <div *ngIf="submitted && f['cuentas'].errors" class="invalid-feedback custom-invalid-feedback">
+                                <div *ngIf="f['cuentas'].errors['required']">La cuenta es requerida</div>
+                            </div>
+                        </div>                        
+                        <div class="ml-auto">
+                            <button type="submit" class="btn btn-primary button-color">Consultar</button>
                         </div>
-                    </nav>
-                </div>
-                <div class="col-md-6 d-flex justify-content-end">
-                    <div class="d-flex justify-content-center mt-3">
-                        <button type="submit" class="btn btn-primary button-color">Consultar</button>
-                    </div>
+                    </form>
                 </div>
             </div>
+            
 
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="card custom-card-background" style="padding: 20px;">
-                        <table class="table">
+                        <table class="table" *ngIf="submitted && posForm.valid">
                             <thead>
                                 <tr>
                                     <th scope="col" id="title">Cuenta</th>
@@ -50,19 +43,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">xxxxxxxxx</th>
-                                    <td>Ahorros</td>
-                                    <td>12/02/2024</td>
-                                    <td>Activo</td>
-                                    <td>0,00</td>
-                                    <td>0,00</td>
+                                <tr *ngFor="let pos of posConsolidada">
+                                    <td>{{ pos.cuenta }}</td>
+                                    <td>{{ pos.tipoCuenta }}</td>
+                                    <td>{{ pos.fechaApertura }}</td>
+                                    <td>{{ pos.estado }}</td>
+                                    <td>{{ pos.saldoContable }}</td>
+                                    <td>{{ pos.saldoDisponible }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            
+            
+
         </div>
     </div>
 </div>

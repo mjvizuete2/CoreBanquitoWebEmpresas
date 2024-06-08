@@ -1,41 +1,42 @@
 {
-    "status": "success",
-    "code": "110API",
-    "count": 1,
-    "data": {
-      "recaudos": [
-        {
-          "contrapartida": "00001",
-          "nombres": "Juan Carlos",
-          "cedula": "cedula",
-          "nContrato": "17111111",
-          "monto": "xxxxxxxx",
-          "fechaInicio": "01-01-2001",
-          "fechaVencimiento": "01-01-2002",
-          "cuentaAcreditar": "1111111",
-          "concepto":"pago"
-        },
-        {
-            "contrapartida": "00001",
-            "nombres": "Juan Carlos",
-            "cedula": "cedula",
-            "nContrato": "17111111",
-            "monto": "xxxxxxxx",
-            "fechaInicio": "01-01-2001",
-            "fechaVencimiento": "01-01-2002",
-            "cuentaAcreditar": "1111111",
-            "concepto":"pago"
-          },        {
-            "contrapartida": "00001",
-            "nombres": "Juan Carlos",
-            "cedula": "cedula",
-            "nContrato": "17111111",
-            "monto": "xxxxxxxx",
-            "fechaInicio": "01-01-2001",
-            "fechaVencimiento": "01-01-2002",
-            "cuentaAcreditar": "1111111",
-            "concepto":"pago"
-          }
-      ]
-    }
+  "status": "success",
+  "code": "110API",
+  "count": 1,
+  "data": {
+    "recaudos": [
+      {
+        "contrapartida": "00001",
+        "nombres": "Juan Carlos",
+        "cedula": "cedula",
+        "nContrato": "17111111",
+        "monto": "10",
+        "fechaInicio": "01-01-2001",
+        "fechaVencimiento": "01-01-2002",
+        "cuentaAcreditar": "1111111",
+        "concepto": "pago"
+      },
+      {
+        "contrapartida": "00001",
+        "nombres": "Juan Carlos",
+        "cedula": "cedula",
+        "nContrato": "17111111",
+        "monto": "11",
+        "fechaInicio": "02-01-2001",
+        "fechaVencimiento": "01-01-2002",
+        "cuentaAcreditar": "1111111",
+        "concepto": "pago"
+      },
+      {
+        "contrapartida": "00001",
+        "nombres": "Juan Carlos",
+        "cedula": "cedula",
+        "nContrato": "17111111",
+        "monto": "111",
+        "fechaInicio": "05-01-2001",
+        "fechaVencimiento": "01-01-2002",
+        "cuentaAcreditar": "1111111",
+        "concepto": "pago"
+      }
+    ]
   }
+}

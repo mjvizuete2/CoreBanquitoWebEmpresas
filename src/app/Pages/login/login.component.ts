@@ -38,17 +38,18 @@ export class LoginComponent implements OnInit {
 
     if (this.loginForm.valid) {
       const credentials = this.loginForm.value;
-      // this.loginService.login(credentials).subscribe(
-      //   (response) => {
-      //     console.log('Login successful', response);
-      //   },
-      //   (error) => {
-      //     console.error('Login failed', error);
-      //   }
-      // );
-      console.log(this.loginForm.value);
-      this.setItem('usuario', this.loginForm.value);
-      this.router.navigate(['/posicionConsolidada']);
+      this.loginService.login(credentials).subscribe(
+        (response) => {
+          console.log('Login successful', response);
+          console.log(this.loginForm.value);
+          this.setItem('usuario', this.loginForm.value);
+          this.router.navigate(['/posicionConsolidada']);
+        },
+        (error) => {
+          console.error('Login failed', error);
+        }
+      );
+
     }
   }
 }

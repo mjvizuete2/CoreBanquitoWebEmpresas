@@ -1,0 +1,33 @@
+{
+    "status": "success",
+    "code": "110API",
+    "count": 1,
+    "data": {
+      "posConsolidada": [
+        {
+          "cuenta": "xxxxxxxxx",
+          "tipoCuenta": "Corriente",
+          "fechaApertura": "17-05-2002",
+          "estado": "activo",
+          "saldoContable": "10.27",
+          "saldoDisponible": "00,00"
+        },
+        {
+          "cuenta": "yyyyyyyy",
+          "tipoCuenta": "Corriente",
+          "fechaApertura": "17-05-2002",
+          "estado": "activo",
+          "saldoContable": "10.27",
+          "saldoDisponible": "00,00"
+        },
+        {
+          "cuenta": "yyyyyyyy",
+          "tipoCuenta": "Corriente",
+          "fechaApertura": "17-05-2002",
+          "estado": "activo",
+          "saldoContable": "10.27",
+          "saldoDisponible": "00,00"
+        }
+      ]
+    }
+  }

@@ -1,0 +1,8 @@
+{
+    "/Symfony3/*": {
+        "target": "http://localhost",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}

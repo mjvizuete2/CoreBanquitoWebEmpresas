@@ -9,78 +9,78 @@
         <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
             <h3 class="text-center">MOVIMIENTOS</h3>
             <div class="row">
-                <div class="col-md-6">
-                    <nav class="navbar navbar-expand-lg navbar-light  flex-column align-items-start">
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav flex-column w-100">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Cuentas
-                                    </a>
-                                    <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
-                                        <li *ngFor="let numero of cuentas">
-                                            <a class="dropdown-item">{{ numero }}</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                <div class="">
+                    <form [formGroup]="cuentasForm" (ngSubmit)="onSubmit()" class="d-flex flex-wrap">
+                        <div class="form-group flex-grow-1">
+                            <select id="cuentas" formControlName="cuentas" class="form-control" [ngClass]="{'is-invalid': submitted && f['cuentas'].errors}">
+                                <option value="">Selecciona una cuenta</option>
+                                <option *ngFor="let cuenta of cuentas" [value]="cuenta">{{ cuenta }}</option>
+                            </select>
+                            <div *ngIf="submitted && f['cuentas'].errors" class="invalid-feedback custom-invalid-feedback">
+                                <div *ngIf="f['cuentas'].errors['required']">La cuenta es requerida</div>
+                            </div>
+                        </div>       
+                        <div class="form-group flex-grow-1">
+                            <select id="tipo" formControlName="tipo" class="form-control" [ngClass]="{'is-invalid': submitted && f['tipo'].errors}">
+                                <option value="">Selecciona un tipo de consulta</option>
+                                <option value="ultimosMovs">Últimos movimientos</option>
+                                <option value="rangoFecha">Por rango de fecha</option>
+                            </select>
+                            <div *ngIf="submitted && f['tipo'].errors" class="invalid-feedback custom-invalid-feedback">
+                                <div *ngIf="f['tipo'].errors['required']">El tipo de consulta es requerido</div>
+                            </div>
+                        </div>  
+                        <div class="w-100"></div> <!-- Línea para forzar un salto de línea -->
+                        <div class="form-group flex-grow-1 mt-2">
+                            <div *ngIf="cuentasForm.get('tipo')?.value === 'rangoFecha'">
+                                <label for="fechaInicio">Fecha de inicio</label>
+                                <input type="date" id="fechaInicio" formControlName="fechaInicio" class="form-control">
+                            </div>
                         </div>
-                    </nav>
-                </div>
-                <div class="col-md-6">
-                    <nav class="navbar navbar-expand-lg navbar-light  flex-column align-items-start">
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav flex-column w-100">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                        Tipo de consulta
-                                    </a>
-                                    <ul class="dropdown-menu w-100" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item">Por rango de fecha</a></li>
-                                        <li><a class="dropdown-item">Últimos movimientos</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <div class="form-group flex-grow-1 mt-2">
+                            <div *ngIf="cuentasForm.get('tipo')?.value === 'rangoFecha'">
+                                <label for="fechaFin">Fecha de fin</label>
+                                <input type="date" id="fechaFin" formControlName="fechaFin" class="form-control">
+                            </div>
+                        </div>                
+                        <div class="ml-auto mt-2">
+                            <button type="submit" class="btn btn-primary button-color">Consultar</button>
                         </div>
-                    </nav>
-                </div>
-                <div class="col-md-6 d-flex justify-content-end">
-                    <div class="d-flex justify-content-center mt-3">
-                        <button type="submit" class="btn btn-primary button-color">Consultar</button>
-                    </div>
+                    </form>
                 </div>
             </div>
-
+            
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="card custom-card-background" style="padding: 20px;">
-                        <table class="table">
+                        <table class="table" *ngIf="submitted && cuentasForm.valid">
                             <thead>
                                 <tr>
-                                    <th scope="col" id="title">Cuenta</th>
-                                    <th scope="col" id="title">Tipo de cuenta</th>
-                                    <th scope="col" id="title">Fecha de apertura</th>
-                                    <th scope="col" id="title">Estado</th>
+                                    <th scope="col" id="title">Fecha</th>
+                                    <th scope="col" id="title">Concepto</th>
+                                    <th scope="col" id="title">Documento</th>
+                                    <th scope="col" id="title">Tipo</th>
+                                    <th scope="col" id="title">Oficina</th>
+                                    <th scope="col" id="title">Monto</th>
                                     <th scope="col" id="title">Saldo contable</th>
-                                    <th scope="col" id="title">Saldo disponible</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row">xxxxxxxxx</th>
-                                    <td>Ahorros</td>
-                                    <td>12/02/2024</td>
-                                    <td>Activo</td>
-                                    <td>0,00</td>
-                                    <td>0,00</td>
+                                <tr *ngFor="let mov of movimientos">
+                                    <td>{{ mov.fecha }}</td>
+                                    <td>{{ mov.concepto }}</td>
+                                    <td>{{ mov.documento }}</td>
+                                    <td>{{ mov.tipo }}</td>
+                                    <td>{{ mov.oficina }}</td>
+                                    <td>{{ mov.monto }}</td>
+                                    <td>{{ mov.saldoContable }}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

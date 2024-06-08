@@ -5,13 +5,34 @@
     "data": {
       "cuentas": [
         {
-          "numero": "1111111"
+          "numero": "1111111",
+          "fecha": "12/02/2024",
+          "concepto": "Pago internet",
+          "documento": "1111111",
+          "tipo": "Cobro",
+          "oficina":"Agencia1",
+          "monto": "11.11",
+          "saldoContable":"50,00"
         },
         {
-          "numero": "222222"
+          "numero": "222224",
+          "fecha": "12/02/2024",
+          "concepto": "Pago internet",
+          "documento": "22222",
+          "tipo": "Cobro",
+          "oficina":"Agencia2",
+          "monto": "11.11",
+          "saldoContable":"50,00"
         },
         {
-          "numero": "333333333"
+          "numero": "3333333",
+          "fecha": "12/02/2024",
+          "concepto": "Pago internet",
+          "documento": "333333",
+          "tipo": "Cobro",
+          "oficina":"Agencia3",
+          "monto": "11.11",
+          "saldoContable":"50,00"
         }
       ]
     }
