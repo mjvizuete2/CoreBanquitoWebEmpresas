@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router
-  ) { }
+  ) {}
 
   setItem(key: string, value: any): void {
     localStorage.setItem(key, JSON.stringify(value));
@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
           console.error('Login failed', error);
         }
       );
-
     }
   }
 }

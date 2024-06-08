@@ -1,13 +1,11 @@
 import { Component, ElementRef, Renderer2, HostListener } from '@angular/core';
 
-
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.css']
+  styleUrls: ['./menu.component.css'],
 })
-export class MenuComponent{
-
+export class MenuComponent {
   constructor(private renderer: Renderer2, private elRef: ElementRef) {}
 
   @HostListener('document:click', ['$event'])
@@ -35,11 +33,11 @@ export class MenuComponent{
   }
 
   closeAllDropdowns(): void {
-    const dropdowns = this.elRef.nativeElement.querySelectorAll('.dropdown-menu.show');
+    const dropdowns = this.elRef.nativeElement.querySelectorAll(
+      '.dropdown-menu.show'
+    );
     dropdowns.forEach((dropdown: HTMLElement) => {
       this.renderer.removeClass(dropdown, 'show');
     });
   }
 }
-
-

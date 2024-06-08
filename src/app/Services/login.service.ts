@@ -3,24 +3,22 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
   private isLoggedInFlag: boolean = false;
   private apiUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   isLoggedIn(): boolean {
     return this.isLoggedInFlag;
   }
 
-  login(credentials: { user: string, password: string }): Observable<any> {
-    this.isLoggedInFlag = true; 
+  login(credentials: { user: string; password: string }): Observable<any> {
+    this.isLoggedInFlag = true;
     return this.http.get(`${this.apiUrl}/data`);
-
   }
-
 
   // login(username: string, password: string): boolean {
   //   // Lógica para autenticar al usuario (puedes implementarla según tus necesidades)
@@ -37,7 +35,7 @@ export class LoginService {
 
   // }
 
-  register(user: { user: string, password: string }): Observable<any> {
+  register(user: { user: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, user);
   }
 }

@@ -4,14 +4,14 @@ import { RecaudosService } from 'src/app/Services/recaudos.service';
 @Component({
   selector: 'app-reportes-diarios',
   templateUrl: './reportes-diarios.component.html',
-  styleUrls: ['./reportes-diarios.component.css']
+  styleUrls: ['./reportes-diarios.component.css'],
 })
 export class ReportesDiariosComponent implements OnInit {
-  usuario:any;
+  usuario: any;
 
   public recaudos: any[] = [];
 
-  constructor(private recaudosService: RecaudosService) { }
+  constructor(private recaudosService: RecaudosService) {}
   getItem(key: string): any {
     const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : null;
@@ -25,10 +25,9 @@ export class ReportesDiariosComponent implements OnInit {
   cargarReportesRecaudos(): void {
     this.recaudosService.reportesRecaudodsConsultar().subscribe(
       (res) => {
-        console.log('Respuesta del servidor:', res); // Verifica la respuesta del servidor
-        if (res.status === "success" && res.data && res.data.recaudos) {
+        if (res.status === 'success' && res.data && res.data.recaudos) {
           this.recaudos = res.data.recaudos;
-          console.log('Cobros asignados:', this.recaudos); // Verifica la asignación de cobros
+          console.log('Respuesta reportes duarios:', this.recaudos);
         } else {
           console.error('Estructura de datos inesperada:', res);
         }

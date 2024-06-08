@@ -14,7 +14,6 @@ export class CuentasComponent implements OnInit {
   usuario: any;
   submitted = false;
 
-
   constructor(
     private cuentasService: CuentasService,
     private formBuilder: FormBuilder
@@ -29,14 +28,12 @@ export class CuentasComponent implements OnInit {
     this.cuentasForm = this.formBuilder.group({
       cuentas: ['', Validators.required],
       tipo: ['', Validators.required],
-      fechaInicio:  [''],
-      fechaFin:  ['']
-
+      fechaInicio: [''],
+      fechaFin: [''],
     });
     this.usuario = this.getItem('usuario');
     this.cargarCuentas();
   }
-
 
   get f() {
     return this.cuentasForm.controls;
@@ -59,7 +56,6 @@ export class CuentasComponent implements OnInit {
     );
   }
 
-
   cargarMovimientosCuentas(): void {
     this.cuentasService.cuentasConsultar().subscribe(
       // (res) => {
@@ -72,10 +68,9 @@ export class CuentasComponent implements OnInit {
       // }
 
       (res) => {
-        console.log('Respuesta del servidor:', res);
         if (res.status === 'success' && res.data && res.data.cuentas) {
           this.movimientos = res.data.cuentas;
-          console.log('Cobros asignados:', this.movimientos);
+          console.log('Respuesta movimientos:', this.movimientos);
         } else {
           console.error('Estructura de datos inesperada:', res);
         }
@@ -85,7 +80,6 @@ export class CuentasComponent implements OnInit {
       }
     );
   }
-
 
   onSubmit() {
     this.submitted = true;

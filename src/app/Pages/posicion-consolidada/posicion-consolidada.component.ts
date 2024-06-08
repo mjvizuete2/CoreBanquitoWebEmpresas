@@ -63,10 +63,9 @@ export class PosicionConsolidadaComponent implements OnInit {
       // }
 
       (res) => {
-        console.log('Respuesta del servidor:', res);
         if (res.status === 'success' && res.data && res.data.posConsolidada) {
           this.posConsolidada = res.data.posConsolidada;
-          console.log('Cobros asignados:', this.posConsolidada);
+          console.log('Respuesta posicion consolidada:', this.posConsolidada);
         } else {
           console.error('Estructura de datos inesperada:', res);
         }

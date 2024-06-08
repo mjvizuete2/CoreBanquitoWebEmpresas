@@ -4,14 +4,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-recupera-contra',
   templateUrl: './recupera-contra.component.html',
-  styleUrls: ['./recupera-contra.component.css']
+  styleUrls: ['./recupera-contra.component.css'],
 })
-
 export class RecuperaContraComponent implements OnInit {
   recuperaForm!: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
     this.recuperaForm = this.formBuilder.group({
@@ -19,7 +18,9 @@ export class RecuperaContraComponent implements OnInit {
     });
   }
 
-  get f() { return this.recuperaForm.controls; }
+  get f() {
+    return this.recuperaForm.controls;
+  }
 
   onSubmit() {
     this.submitted = true;
