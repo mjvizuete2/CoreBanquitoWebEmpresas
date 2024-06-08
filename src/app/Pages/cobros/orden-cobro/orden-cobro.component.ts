@@ -7,14 +7,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './orden-cobro.component.html',
   styleUrls: ['./orden-cobro.component.css']
 })
-export class OrdenCobroComponent {
+export class OrdenCobroComponent implements OnInit{
+  usuario:any;
+
 
   cobroForm!: FormGroup;
   submitted = false;
 
   constructor(private formBuilder: FormBuilder) { }
 
+  getItem(key: string): any {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  }
+
   ngOnInit(): void {
+    this.usuario = this.getItem('usuario');
+
     this.cobroForm = this.formBuilder.group({
       usuario: ['', Validators.required],
       cuentaAcreditar: ['', Validators.required],
@@ -33,6 +42,6 @@ export class OrdenCobroComponent {
       return;
     }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.cobroForm.value, null, 4));
+    console.log(this.cobroForm.value);
   }
 }

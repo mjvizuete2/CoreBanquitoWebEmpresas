@@ -7,12 +7,18 @@ import { RecaudosService } from 'src/app/Services/recaudos.service';
   styleUrls: ['./reportes-diarios.component.css']
 })
 export class ReportesDiariosComponent implements OnInit {
+  usuario:any;
 
   public recaudos: any[] = [];
 
   constructor(private recaudosService: RecaudosService) { }
+  getItem(key: string): any {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  }
 
   ngOnInit(): void {
+    this.usuario = this.getItem('usuario');
     this.cargarReportesRecaudos();
   }
 

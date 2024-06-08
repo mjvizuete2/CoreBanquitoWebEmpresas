@@ -1,0 +1,15 @@
+{
+    "status": "success",
+    "code": "110API",
+    "count": 1,
+    "data": {
+      "user": [
+        {
+            "id":1,
+            "usuario": "majo", 
+            "password": "majo123"
+        }
+      ]
+    }
+  }
+  

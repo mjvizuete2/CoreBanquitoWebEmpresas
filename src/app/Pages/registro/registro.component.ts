@@ -28,6 +28,6 @@ export class RegistroComponent implements OnInit {
       return;
     }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.registroForm.value, null, 4));
+    console.log(this.registroForm.value);
   }
 }

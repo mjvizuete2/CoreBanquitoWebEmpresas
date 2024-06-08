@@ -9,10 +9,17 @@ import { CobrosService } from 'src/app/Services/cobros.service';
 export class ReportesCobrosComponent  implements OnInit {
 
   public cobros: any[] = [];
+  usuario:any;
 
   constructor(private cobrosService: CobrosService) { }
 
+  getItem(key: string): any {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  }
+
   ngOnInit(): void {
+    this.usuario = this.getItem('usuario');
     this.cargarReportes();
   }
 

@@ -28,6 +28,6 @@ export class RecuperaContraComponent implements OnInit {
       return;
     }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.recuperaForm.value, null, 4));
+    console.log(this.recuperaForm.value);
   }
 }

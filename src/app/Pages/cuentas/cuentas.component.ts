@@ -8,10 +8,18 @@ import { CuentasService } from 'src/app/Services/cuentas.service';
 })
 export class CuentasComponent implements OnInit  {
   public cuentas: string[] = [];
+  usuario:any;
+
 
   constructor(private cuentasService: CuentasService) { }
 
+  getItem(key: string): any {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  }
+
   ngOnInit(): void {
+    this.usuario = this.getItem('usuario');
     this.cargarCuentas();
   }
 

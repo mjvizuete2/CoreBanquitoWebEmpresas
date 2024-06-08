@@ -6,14 +6,23 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './orden-recaudo.component.html',
   styleUrls: ['./orden-recaudo.component.css']
 })
-export class OrdenRecaudoComponent {
+export class OrdenRecaudoComponent implements OnInit  {
 
   recaudoForm!: FormGroup;
   submitted = false;
+  usuario:any;
+
 
   constructor(private formBuilder: FormBuilder) { }
 
+  getItem(key: string): any {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
+  }
+  
   ngOnInit(): void {
+    this.usuario = this.getItem('usuario');
+
     this.recaudoForm = this.formBuilder.group({
       nombres: ['', Validators.required],
       cedula: ['', Validators.required],
@@ -36,6 +45,6 @@ export class OrdenRecaudoComponent {
       return;
     }
 
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.recaudoForm.value, null, 4));
+    console.log(this.recaudoForm.value);
   }
 }
