@@ -1,3 +1,3 @@
-# WebEmpresas
+# Backoffice
 
-Aplicación para el canal de Banca Web Empresas en CoreBanquito
+Aplicación para el canal de BackOffice Empresas en CoreBanquito
