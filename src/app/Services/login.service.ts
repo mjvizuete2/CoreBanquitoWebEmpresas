@@ -17,7 +17,9 @@ export class LoginService {
 
   login(credentials: { user: string; password: string }): Observable<any> {
     this.isLoggedInFlag = true;
-    return this.http.get(`${this.apiUrl}/data`);
+    return this.http.get('./assets/pruebasJs/login.json');
+
+    //return this.http.get(`${this.apiUrl}/data`);
   }
 
   // login(username: string, password: string): boolean {

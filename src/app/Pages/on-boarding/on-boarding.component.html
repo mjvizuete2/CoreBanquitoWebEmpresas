@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="menu d-flex flex-column align-items-center">
+        <app-menu></app-menu>
+    </div>
+    <span class="navbar-text position-absolute" *ngIf="usuario" style="right: 20px; top: 20px; font-size: 20px;">
+        Bienvenido, {{ usuario.usuario }}!
+    </span>
+    <div class="content">
+        <div class="col-md-12 d-flex align-items-center justify-content-center">
+            <div class="card mt-5 custom-card-background background-color" style="width: 100%; padding:50px ">
+                <div class="card-body">
+                    <h3 class="text-center">Contrato de activación de cobros y recaudos</h3>
+                    <p>Entre: </p>
+                    <p>Juanito S.A., representada por {{usuario.usuario}}, en adelante "El Cliente".</p>
+                    <p>Y:
+                        BancoBanQuito, en adelante "El Banco".</p>
+                    <p>Cláusulas:</p>
+                    <li>
+                        Objeto: El Banco activará la opción de Cobros y Recaudos en la banca empresas de El Cliente.
+                    </li>
+                    <li>Obligaciones del Cliente: Utilizar el servicio conforme a las políticas del Banco y proveer la
+                        información necesaria.</li>
+                    <li>Duración y Terminación: Este contrato entra en vigor a partir de su aceptación y puede ser
+                        terminado por cualquiera de las partes con una notificación escrita.</li>
+                </div>
+                <form [formGroup]="posForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group mt-3">
+                        <input type="checkbox" id="acceptTerms" formControlName="acceptTerms" />
+                        <label for="acceptTerms">Acepto términos y condiciones</label>
+                    </div>
+                    
+                    <div class="d-flex flex-column align-items-center w-100">
+                        <button  type="submit" class="btn btn-primary mt-3 w-100 button-color" [disabled]="!posForm.get('acceptTerms')?.value">Continuar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

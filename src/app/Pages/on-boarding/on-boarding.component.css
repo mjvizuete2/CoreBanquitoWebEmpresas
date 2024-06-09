@@ -1,0 +1,22 @@
+.custom-card-background {
+    border: none;
+  }
+  
+  .background-color {
+    background-color: #03B5CF;
+  }
+  
+.button-color{
+    background-color: #FCBE18;
+    color: black;
+    border-color:#FCBE18;
+}
+.button-color-second{
+    background-color: #BFE7ED;
+    color: black;
+    border-color: #BFE7ED;
+}
+
+.custom-invalid-feedback {
+  color: white;
+}

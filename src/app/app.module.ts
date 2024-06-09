@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +17,7 @@ import { ReportesCobrosComponent } from './Pages/cobros/reportes-cobros/reportes
 import { OrdenRecaudoComponent } from './Pages/recaudos/orden-recaudo/orden-recaudo.component';
 import { ReportesDiariosComponent } from './Pages/recaudos/reportes-diarios/reportes-diarios.component';
 import { ReportesTiempoRealComponent } from './Pages/recaudos/reportes-tiempo-real/reportes-tiempo-real.component';
+import { OnBoardingComponent } from './Pages/on-boarding/on-boarding.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +33,8 @@ import { ReportesTiempoRealComponent } from './Pages/recaudos/reportes-tiempo-re
     OrdenRecaudoComponent,
     ReportesDiariosComponent,
     ReportesTiempoRealComponent,
+    OnBoardingComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { ReportesTiempoRealComponent } from './Pages/recaudos/reportes-tiempo-re
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    FormsModule
 
   ],
   providers: [

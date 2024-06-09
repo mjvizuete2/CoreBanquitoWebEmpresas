@@ -1,12 +1,25 @@
-import { Component, ElementRef, Renderer2, HostListener } from '@angular/core';
+import { Component, ElementRef, Renderer2, HostListener, OnInit  } from '@angular/core';
+import { OnBoardingService } from 'src/app/Services/onboardingService';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
 })
-export class MenuComponent {
-  constructor(private renderer: Renderer2, private elRef: ElementRef) {}
+export class MenuComponent implements OnInit  {
+  termsAccepted: boolean = false;
+  
+  constructor(
+    private renderer: Renderer2, 
+    private elRef: ElementRef,
+    private onBoardingService:OnBoardingService
+  ) {}
+
+  ngOnInit(): void {
+    this.onBoardingService.termsAccepted$.subscribe(accepted => {
+      this.termsAccepted = accepted;
+    });
+  }
 
   @HostListener('document:click', ['$event'])
   handleOutsideClick(event: Event) {
