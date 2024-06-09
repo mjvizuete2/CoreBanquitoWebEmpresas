@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
           console.log('Login successful', response);
           console.log(this.loginForm.value);
           this.setItem('usuario', this.loginForm.value);
-          this.router.navigate(['/posicionConsolidada']);
+          this.router.navigate(['/ordenCobro']);
         },
         (error) => {
           console.error('Login failed', error);

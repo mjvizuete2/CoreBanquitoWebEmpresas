@@ -3,8 +3,9 @@
   }
   
   .background-color {
-    background-color: #03B5CF;
+    background-color: rgba(255, 255, 255, 0.5); /* Blanco con 50% de opacidad */
   }
+  
   
 .button-color{
     background-color: #FCBE18;

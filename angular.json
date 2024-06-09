@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "webEmpresas": {
+    "backoffice": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/web-empresas",
+            "outputPath": "dist/backoffice",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -64,17 +64,17 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "banquito-bancaweb:build",
+            "browserTarget": "banquito-backoffice:build",
             "proxyConfig": "src/proxy.conf.json",
             "host": "0.0.0.0",
             "port": 4200
           },
           "configurations": {
             "production": {
-              "browserTarget": "webEmpresas:build:production"
+              "browserTarget": "backoffice:build:production"
             },
             "development": {
-              "browserTarget": "webEmpresas:build:development"
+              "browserTarget": "backoffice:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +82,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "webEmpresas:build"
+            "browserTarget": "backoffice:build"
           }
         },
         "test": {

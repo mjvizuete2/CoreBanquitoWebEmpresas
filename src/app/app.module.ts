@@ -8,10 +8,8 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Pages/login/login.component';
-import { RegistroComponent } from './Pages/registro/registro.component';
 import { RecuperaContraComponent } from './Pages/recupera-contra/recupera-contra.component';
 import { MenuComponent } from './Utilities/menu/menu.component';
-import { PosicionConsolidadaComponent } from './Pages/posicion-consolidada/posicion-consolidada.component';
 import { CuentasComponent } from './Pages/cuentas/cuentas.component';
 import { OrdenCobroComponent } from './Pages/cobros/orden-cobro/orden-cobro.component';
 import { ReportesCobrosComponent } from './Pages/cobros/reportes-cobros/reportes-cobros.component';
@@ -23,10 +21,8 @@ import { ReportesTiempoRealComponent } from './Pages/recaudos/reportes-tiempo-re
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistroComponent,
     RecuperaContraComponent,
     MenuComponent,
-    PosicionConsolidadaComponent,
     CuentasComponent,
     OrdenCobroComponent,
     ReportesCobrosComponent,

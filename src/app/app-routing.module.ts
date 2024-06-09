@@ -3,9 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './Services/authGuard';
 
 import { LoginComponent } from './Pages/login/login.component';
-import { RegistroComponent } from './Pages/registro/registro.component';
 import { RecuperaContraComponent } from './Pages/recupera-contra/recupera-contra.component';
-import { PosicionConsolidadaComponent } from './Pages/posicion-consolidada/posicion-consolidada.component';
 import { CuentasComponent } from './Pages/cuentas/cuentas.component';
 import { OrdenCobroComponent } from './Pages/cobros/orden-cobro/orden-cobro.component';
 import { ReportesCobrosComponent } from './Pages/cobros/reportes-cobros/reportes-cobros.component';
@@ -16,9 +14,7 @@ import { ReportesTiempoRealComponent } from './Pages/recaudos/reportes-tiempo-re
 const routes: Routes = [
   { path: '', component: LoginComponent , pathMatch: 'full'},
   { path: 'login', component: LoginComponent , pathMatch: 'full'},
-  { path: 'registro', component: RegistroComponent},
   { path: 'recuperaContra', component: RecuperaContraComponent},
-  { path: 'posicionConsolidada', component: PosicionConsolidadaComponent, canActivate: [AuthGuard]},
   { path: 'cuentas', component: CuentasComponent, canActivate: [AuthGuard]},
   { path: 'ordenCobro', component: OrdenCobroComponent, canActivate: [AuthGuard]},
   { path: 'reporteCobro', component: ReportesCobrosComponent, canActivate: [AuthGuard]},

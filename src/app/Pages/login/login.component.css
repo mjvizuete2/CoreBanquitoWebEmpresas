@@ -1,5 +1,6 @@
-.background-color {
-    background-color: #03B5CF;
+
+  .background-color {
+    background-color: rgba(255, 255, 255, 0.5); /* Blanco con 50% de opacidad */
   }
   
 .button-color{
@@ -31,3 +32,8 @@
     border: none;
   }
   
+
+  
+  body {
+    background-color: #0E3A5D; /* Cambia el color de fondo según tus preferencias */
+  }
