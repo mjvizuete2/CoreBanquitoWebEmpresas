@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OnBoardingService } from 'src/app/Services/onboardingService';
 import { Router } from '@angular/router';
-
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-on-boarding',
@@ -18,19 +18,16 @@ export class OnBoardingComponent implements OnInit {
   constructor(
     private onBoardingService:OnBoardingService,
     private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
-  
-  getItem(key: string): any {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
-  }
+    private router: Router,private authService:AuthService) {
+      this.usuario=authService.getUser();
+     }
+
+
 
   ngOnInit(): void {
     this.posForm = this.formBuilder.group({
       acceptTerms: [''],
     });
-    this.usuario = this.getItem('usuario');
   }
 
   get f() {
@@ -40,7 +37,7 @@ export class OnBoardingComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    
+
     console.log(this.posForm.value.acceptTerms);
     this.onBoardingService.setTermsAccepted(this.posForm.value.acceptTerms);
     this.router.navigate(['/posicionConsolidada']);

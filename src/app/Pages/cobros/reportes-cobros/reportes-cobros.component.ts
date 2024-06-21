@@ -1,6 +1,6 @@
+import { AuthService } from 'src/app/Services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { CobrosService } from 'src/app/Services/cobros.service';
-
 @Component({
   selector: 'app-reportes-cobros',
   templateUrl: './reportes-cobros.component.html',
@@ -10,7 +10,9 @@ export class ReportesCobrosComponent implements OnInit {
   public cobros: any[] = [];
   usuario: any;
 
-  constructor(private cobrosService: CobrosService) {}
+  constructor(private cobrosService: CobrosService,private authService:AuthService) {
+    this.usuario=authService.getUser();
+   }
 
   getItem(key: string): any {
     const item = localStorage.getItem(key);
@@ -18,8 +20,15 @@ export class ReportesCobrosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usuario = this.getItem('usuario');
     this.cargarReportes();
+  }
+
+  pagarCobro(cobro: any): void {
+    console.log('Cobro a pagar:', cobro);
+  }
+
+  cancelarCobro(cobro: any): void {
+    console.log('Cobro a cancelar:', cobro);
   }
 
   cargarReportes(): void {

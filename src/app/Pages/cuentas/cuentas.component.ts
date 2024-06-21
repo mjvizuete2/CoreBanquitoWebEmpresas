@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CuentasService } from 'src/app/Services/cuentas.service';
-
+import { AuthService } from 'src/app/Services/auth.service';
 @Component({
   selector: 'app-cuentas',
   templateUrl: './cuentas.component.html',
@@ -16,13 +16,11 @@ export class CuentasComponent implements OnInit {
 
   constructor(
     private cuentasService: CuentasService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,private authService:AuthService) {
+      this.usuario=authService.getUser();
+     }
 
-  getItem(key: string): any {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
-  }
+
 
   ngOnInit(): void {
     this.cuentasForm = this.formBuilder.group({
@@ -31,7 +29,6 @@ export class CuentasComponent implements OnInit {
       fechaInicio: [''],
       fechaFin: [''],
     });
-    this.usuario = this.getItem('usuario');
     this.cargarCuentas();
   }
 

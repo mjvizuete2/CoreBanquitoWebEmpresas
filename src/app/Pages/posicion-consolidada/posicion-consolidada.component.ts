@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CuentasService } from 'src/app/Services/cuentas.service';
 import { PosConsolidadaService } from 'src/app/Services/posConsolidada.service';
-
+import { AuthService } from 'src/app/Services/auth.service';
 @Component({
   selector: 'app-posicion-consolidada',
   templateUrl: './posicion-consolidada.component.html',
@@ -18,19 +18,15 @@ export class PosicionConsolidadaComponent implements OnInit {
   constructor(
     private cuentasService: CuentasService,
     private posConsolidadaService: PosConsolidadaService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,private authService:AuthService) {
+      this.usuario=authService.getUser();
+     }
 
-  getItem(key: string): any {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
-  }
 
   ngOnInit(): void {
     this.posForm = this.formBuilder.group({
       cuentas: ['', Validators.required],
     });
-    this.usuario = this.getItem('usuario');
     this.cargarCuentas();
   }
 

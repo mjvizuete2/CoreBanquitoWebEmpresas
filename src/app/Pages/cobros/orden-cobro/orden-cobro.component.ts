@@ -1,34 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as XLSX from 'xlsx';
-
+import { AuthService } from 'src/app/Services/auth.service';
+import { count } from 'rxjs';
 @Component({
   selector: 'app-orden-cobro',
   templateUrl: './orden-cobro.component.html',
   styleUrls: ['./orden-cobro.component.css']
 })
+
 export class OrdenCobroComponent implements OnInit{
   usuario:any;
   excelData:any;
   cobroForm!: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private authService:AuthService) {
+    this.usuario=authService.getUser();
+   }
 
-  getItem(key: string): any {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
-  }
+
 
   ngOnInit(): void {
-    this.usuario = this.getItem('usuario');
 
     this.cobroForm = this.formBuilder.group({
-      referencia: ['', Validators.required],
-      cuentaAcreditar: ['', Validators.required],
-      fechaInicio: ['', Validators.required],
-      fechaVencimiento: ['', Validators.required],
-      file: ['', Validators.required]
+      order_id: ['', Validators.required],
+      account_id: ['', Validators.required],
+      start_date: ['', Validators.required],
+      due_date: ['', Validators.required],
+      file: ['', Validators.required],
+      type: ['', Validators.required]
       // frecuencia: ['', Validators.required]
     });
   }
@@ -53,14 +54,14 @@ export class OrdenCobroComponent implements OnInit{
     };
     fileReader.readAsArrayBuffer(file);
   }
-  
+
   handleExcelData(workbook: XLSX.WorkBook) {
     // Aquí puedes acceder a las hojas del archivo Excel y realizar el procesamiento necesario
     const firstSheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[firstSheetName];
     this.excelData = XLSX.utils.sheet_to_json(worksheet, { raw: true });
   }
-  
+
 
   onSubmit() {
     this.submitted = true;
@@ -69,12 +70,25 @@ export class OrdenCobroComponent implements OnInit{
       return;
     }
 
-    const combinedData = this.excelData.map((row: any) => ({
-      ...this.cobroForm.value,
+    const itemOrders = this.excelData.map((row: any) => ({
       ...row
     }));
-  
-    console.log(combinedData);
+
+    const totalAmount = this.excelData.reduce((total: number, row: any) => {
+      // Verificar si row.total es un número válido antes de sumarlo
+      const rowTotal = parseFloat(row.total); // Convertir a número (si es necesario)
+      if (!isNaN(rowTotal)) {
+        return total + rowTotal;
+      } else {
+        return total; // No sumar si row.total no es un número válido
+      }
+    }, 0);
+
+
+    this.cobroForm.value.orders_items = itemOrders;
+    this.cobroForm.value.records = itemOrders.length;
+    this.cobroForm.value.total_amount = totalAmount;
+    console.log(this.cobroForm.value);
 
   }
 }

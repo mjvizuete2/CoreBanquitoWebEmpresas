@@ -14,22 +14,22 @@
                         <form [formGroup]="cobroForm" (ngSubmit)="onSubmit()">
                             <div class="d-flex justify-content-between">
                                 <div class="form-group me-2" style="flex: 1;">
-                                    <label id="label" for="referencia">Referencia</label>
-                                    <input type="text" id="referencia" formControlName="referencia" class="form-control"
-                                        [ngClass]="{'is-invalid': submitted && f['referencia'].errors}" />
-                                    <div *ngIf="submitted && f['referencia'].errors"
+                                    <label id="label" for="order_id">Referencia</label>
+                                    <input type="text" id="order_id" formControlName="order_id" class="form-control"
+                                        [ngClass]="{'is-invalid': submitted && f['order_id'].errors}" />
+                                    <div *ngIf="submitted && f['order_id'].errors"
                                         class="invalid-feedback custom-invalid-feedback">
-                                        <div *ngIf="f['referencia'].errors['required']">La referencia es requerida</div>
+                                        <div *ngIf="f['order_id'].errors['required']">La referencia es requerida</div>
                                     </div>
                                 </div>
                                 <div class="form-group ms-2" style="flex: 1;">
-                                    <label id="label" for="cuentaAcreditar">Cuenta a acreditar</label>
-                                    <input type="cuentaAcreditar" id="cuentaAcreditar" formControlName="cuentaAcreditar"
+                                    <label id="label" for="account_id">Cuenta a acreditar</label>
+                                    <input type="account_id" id="account_id" formControlName="account_id"
                                         class="form-control"
-                                        [ngClass]="{'is-invalid': submitted && f['cuentaAcreditar'].errors}" />
-                                    <div *ngIf="submitted && f['cuentaAcreditar'].errors"
+                                        [ngClass]="{'is-invalid': submitted && f['account_id'].errors}" />
+                                    <div *ngIf="submitted && f['account_id'].errors"
                                         class="invalid-feedback custom-invalid-feedback">
-                                        <div *ngIf="f['cuentaAcreditar'].errors['required']">La cuenta a acreditar es
+                                        <div *ngIf="f['account_id'].errors['required']">La cuenta a acreditar es
                                             requerida</div>
                                     </div>
                                 </div>
@@ -37,44 +37,43 @@
                             <div class="d-flex justify-content-between">
 
                                 <div class="form-group ms-2" style="flex: 1;">
-                                    <label id="label" for="fechaInicio">Fecha de inicio</label>
-                                    <input type="date" id="fechaInicio" formControlName="fechaInicio"
+                                    <label id="label" for="start_date">Fecha de inicio</label>
+                                    <input type="date" id="start_date" formControlName="start_date"
                                         class="form-control"
-                                        [ngClass]="{'is-invalid': submitted && f['fechaInicio'].errors}" />
-                                    <div *ngIf="submitted && f['fechaInicio'].errors"
+                                        [ngClass]="{'is-invalid': submitted && f['start_date'].errors}" />
+                                    <div *ngIf="submitted && f['start_date'].errors"
                                         class="invalid-feedback custom-invalid-feedback">
-                                        <div *ngIf="f['fechaInicio'].errors['required']">La fecha de inicio es requerida
+                                        <div *ngIf="f['start_date'].errors['required']">La fecha de inicio es requerida
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group ms-2" style="flex: 1;">
-                                    <label id="label" for="fechaVencimiento">Fecha de vencimiento</label>
-                                    <input type="date" id="fechaVencimiento" formControlName="fechaVencimiento"
-                                        class="form-control"
-                                        [ngClass]="{'is-invalid': submitted && f['fechaVencimiento'].errors}" />
-                                    <div *ngIf="submitted && f['fechaVencimiento'].errors"
-                                        class="invalid-feedback custom-invalid-feedback">
-                                        <div *ngIf="f['fechaVencimiento'].errors['required']">La fecha de vencimiento es
-                                            requerida</div>
-                                    </div>
-                                </div>
+                                  <label id="label" for="due_date">Fecha de vencimiento</label>
+                                  <input type="date" id="due_date" formControlName="due_date"
+                                      class="form-control"
+                                      [ngClass]="{'is-invalid': submitted && f['due_date'].errors}" />
+                                  <div *ngIf="submitted && f['due_date'].errors"
+                                      class="invalid-feedback custom-invalid-feedback">
+                                      <div *ngIf="f['due_date'].errors['required']">La fecha de vencimiento es
+                                          requerida</div>
+                                  </div>
+                              </div>
                             </div>
-                            <!-- <div class="d-flex justify-content-between">
-                                <div class="form-group ms-2" style="flex: 1;">
-                                    <label id="label" for="frecuencia">Frecuencia de cobro</label>
-                                    <input type="frecuencia" id="frecuencia" formControlName="frecuencia"
-                                        class="form-control"
-                                        [ngClass]="{'is-invalid': submitted && f['frecuencia'].errors}" />
-                                    <div *ngIf="submitted && f['frecuencia'].errors"
-                                        class="invalid-feedback custom-invalid-feedback">
-                                        <div *ngIf="f['frecuencia'].errors['required']">La frecuencia de cobro es
-                                            requerida</div>
-                                    </div>
-                                </div>
-                            </div> -->
                             <div class="form-group ms-2" style="flex: 1;">
-                                <label id="label" for="file">Fecha de vencimiento</label>
+                              <label for="type">Tipo</label>
+                              <select id="type" formControlName="type" class="form-control"
+                                  [ngClass]="{'is-invalid': submitted && f['type'].errors}">
+                                  <option value="">Selecciona un tipo</option>
+                                  <option value="Orden">Orden</option>
+                                  <option value="Recaudo">Recaudo</option>
+                              </select>
+                              <div *ngIf="submitted && f['type'].errors" class="invalid-feedback custom-invalid-feedback">
+                                  <div *ngIf="f['type'].errors['required']">El tipo es requerido</div>
+                              </div>
+                          </div>
+                            <div class="form-group ms-2" style="flex: 1;">
+                                <label id="label" for="file">Archivo</label>
                                 <input type="file" id="file" formControlName="file" class="form-control" (change)="onFileSelected($event)" [ngClass]="{'is-invalid': submitted && f['file'].errors}" >
 
                                 <div *ngIf="submitted && f['file'].errors"
@@ -83,7 +82,7 @@
                                         requerida</div>
                                 </div>
                             </div>
-                                     
+
 
                             <div class="d-flex flex-column align-items-center w-100">
                                 <button type="submit" class="btn btn-primary mt-3 w-100 button-color">Procesar</button>

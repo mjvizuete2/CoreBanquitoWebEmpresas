@@ -10,7 +10,7 @@
                     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                         <div class="form-group">
                             <label id="label" for="usuario">Ingrese su usuario</label>
-                            <input type="text" id="usuario" formControlName="usuario" class="form-control"
+                            <input type="text" id="usuario" [(ngModel)]="username" formControlName="usuario" class="form-control"
                                 [ngClass]="{'is-invalid': submitted && f['usuario'].errors}" />
                             <div *ngIf="submitted && f['usuario'].errors"
                                 class="invalid-feedback custom-invalid-feedback">
@@ -19,12 +19,15 @@
                         </div>
                         <div class="form-group">
                             <label id="label" for="password">Ingrese su contraseña</label>
-                            <input type="password" id="password" formControlName="password" class="form-control"
+                            <input type="password" id="password"  [(ngModel)]="password" formControlName="password" class="form-control"
                                 [ngClass]="{'is-invalid': submitted && f['password'].errors}" />
                             <div *ngIf="submitted && f['password'].errors"
                                 class="invalid-feedback custom-invalid-feedback">
                                 <div *ngIf="f['password'].errors['required']">La contraseña es requerida</div>
                             </div>
+                        </div>
+                        <div *ngIf="errorMessage" style="color: red;">
+                          {{ errorMessage }}
                         </div>
                         <!-- <a class="text-end">¿Olvidó su contraseña?</a> -->
                         <div class="d-flex flex-column align-items-center w-100">
@@ -32,6 +35,7 @@
                             <button type="button" class="btn btn-primary mt-3 w-100 button-color-second" [routerLink]="['/registro']">Afiliarse a
                                 banca empresas</button>
                         </div>
+
                     </form>
                 </div>
             </div>

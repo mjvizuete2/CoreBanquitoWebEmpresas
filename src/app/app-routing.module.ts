@@ -16,17 +16,17 @@ import { OnBoardingComponent } from './Pages/on-boarding/on-boarding.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent , pathMatch: 'full'},
-  { path: 'login', component: LoginComponent , pathMatch: 'full'},
+  { path: 'login', component: LoginComponent , pathMatch: 'full' },
   { path: 'registro', component: RegistroComponent},
   { path: 'recuperaContra', component: RecuperaContraComponent},
   { path: 'posicionConsolidada', component: PosicionConsolidadaComponent, canActivate: [AuthGuard]},
-  { path: 'cuentas', component: CuentasComponent},
-  { path: 'ordenCobro', component: OrdenCobroComponent},
-  { path: 'reporteCobro', component: ReportesCobrosComponent},
-  { path: 'ordenRecaudo', component: OrdenRecaudoComponent},
-  { path: 'reporteRecaudo', component: ReportesDiariosComponent},
-  { path: 'reporteTiempoReal', component: ReportesTiempoRealComponent},
-  { path: 'onboarding', component: OnBoardingComponent},
+  { path: 'cuentas', component: CuentasComponent,canActivate: [AuthGuard]},
+  { path: 'ordenCobro', component: OrdenCobroComponent,canActivate: [AuthGuard]},
+  { path: 'reporteCobro', component: ReportesCobrosComponent,canActivate: [AuthGuard]},
+  { path: 'ordenRecaudo', component: OrdenRecaudoComponent,canActivate: [AuthGuard]},
+  { path: 'reporteRecaudo', component: ReportesDiariosComponent,canActivate: [AuthGuard]},
+  { path: 'reporteTiempoReal', component: ReportesTiempoRealComponent,canActivate: [AuthGuard]},
+  { path: 'onboarding', component: OnBoardingComponent,canActivate: [AuthGuard]},
 
 
 

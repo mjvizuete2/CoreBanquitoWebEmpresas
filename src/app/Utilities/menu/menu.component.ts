@@ -1,6 +1,6 @@
 import { Component, ElementRef, Renderer2, HostListener, OnInit  } from '@angular/core';
 import { OnBoardingService } from 'src/app/Services/onboardingService';
-
+import { AuthService } from 'src/app/Services/auth.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -8,12 +8,13 @@ import { OnBoardingService } from 'src/app/Services/onboardingService';
 })
 export class MenuComponent implements OnInit  {
   termsAccepted: boolean = false;
-  
+  usuario:any;
   constructor(
-    private renderer: Renderer2, 
+    private renderer: Renderer2,
     private elRef: ElementRef,
-    private onBoardingService:OnBoardingService
-  ) {}
+    private onBoardingService:OnBoardingService,
+    private authService:AuthService
+  ) {this.usuario = this.authService.getUser();}
 
   ngOnInit(): void {
     this.onBoardingService.termsAccepted$.subscribe(accepted => {

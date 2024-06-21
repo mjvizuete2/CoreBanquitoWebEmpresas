@@ -33,8 +33,8 @@ import { OnBoardingComponent } from './Pages/on-boarding/on-boarding.component';
     OrdenRecaudoComponent,
     ReportesDiariosComponent,
     ReportesTiempoRealComponent,
-    OnBoardingComponent
-    
+    OnBoardingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -46,7 +46,7 @@ import { OnBoardingComponent } from './Pages/on-boarding/on-boarding.component';
 
   ],
   providers: [
-    
+
   ],
   bootstrap: [AppComponent]
 })

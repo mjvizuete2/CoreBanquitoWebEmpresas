@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/Services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables  } from 'chart.js';
 import { RecaudosService } from 'src/app/Services/recaudos.service';
@@ -14,18 +15,16 @@ export class ReportesTiempoRealComponent implements OnInit{
 
 
   constructor(
-    private recaudosService: RecaudosService
-  ) { Chart.register(...registerables);}
+    private recaudosService: RecaudosService,private authService:AuthService
+  ) {this.authService = authService.getUser();
+     Chart.register(...registerables);}
 
 
 
-  getItem(key: string): any {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
-  }
+
+
 
   ngOnInit(): void {
-    this.usuario = this.getItem('usuario');
     this.cargarReportesRecaudos();
   }
 

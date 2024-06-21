@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { AuthService } from 'src/app/Services/auth.service';
 @Component({
   selector: 'app-orden-recaudo',
   templateUrl: './orden-recaudo.component.html',
@@ -11,15 +11,13 @@ export class OrdenRecaudoComponent implements OnInit {
   submitted = false;
   usuario: any;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder,private authService:AuthService) {
+    this.usuario=authService.getUser();
+   }
 
-  getItem(key: string): any {
-    const item = localStorage.getItem(key);
-    return item ? JSON.parse(item) : null;
-  }
+
 
   ngOnInit(): void {
-    this.usuario = this.getItem('usuario');
 
     this.recaudoForm = this.formBuilder.group({
       nombres: ['', Validators.required],
