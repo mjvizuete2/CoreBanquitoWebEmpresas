@@ -4,19 +4,37 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<boolean> {
-    return this.http.get<{ status: string, code: string, count: number, data: { user: { id: number, usuario: string, password: string, rol: string }[] } }>('./assets/pruebasJs/login.json')
+    return this.http
+      .get<{
+        status: string;
+        code: string;
+        count: number;
+        data: {
+          user: {
+            id: number;
+            usuario: string;
+            password: string;
+            rol: string;
+          }[];
+        };
+      }>('localhost:8080/login')
       .pipe(
-        map(response => {
-          const user = response.data.user.find(u => u.usuario === username && u.password === password);
+        map((response) => {
+          console.log('respuesta ', response);
+          const user = response.data.user.find(
+            (u) => u.usuario === username && u.password === password
+          );
           if (user) {
-            localStorage.setItem('currentUser', JSON.stringify({ usuario: user.usuario, rol: user.rol }));
+            localStorage.setItem(
+              'currentUser',
+              JSON.stringify({ usuario: user.usuario, rol: user.rol })
+            );
             return true;
           } else {
             return false;

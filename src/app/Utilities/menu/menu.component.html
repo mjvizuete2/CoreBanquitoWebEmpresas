@@ -28,31 +28,28 @@
                     <li><a class="dropdown-item" [routerLink]="['/onboarding']">Activación de cobros y recaudos</a></li>
                 </ul>
             </li>
-            <li *ngIf="termsAccepted" class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown3" role="button" (click)="toggleDropdown($event)"
-                    aria-expanded="false">
-                    Ordenes
+            <li *ngIf="termsAccepted && usuario.rol != 'ADMIN'" class="nav-item dropdown">
+                <a class="nav-link dropdown" id="navbarDropdown3" role="button"
+                   aria-expanded="false" [routerLink]="['/ordenCobro']">
+                  Ingreso de Ordenes
                 </a>
-                <ul class="dropdown-menu custom-dropdown-menu w-100" aria-labelledby="navbarDropdown3">
-                    <li *ngIf="usuario.rol == 'agente'"><a class="dropdown-item" [routerLink]="['/ordenCobro']">Orden de cobro</a></li>
-
-                </ul>
-            </li>
+              </li>
+              
             <li *ngIf="termsAccepted" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown4" role="button" (click)="toggleDropdown($event)"
                     aria-expanded="false">
                     Reportes
                 </a>
                 <ul class="dropdown-menu custom-dropdown-menu w-100" aria-labelledby="navbarDropdown4">
-                    <li><a class="dropdown-item" [routerLink]="['/reporteRecaudo']">Reportes diarios</a></li>
+                    <li><a class="dropdown-item" [routerLink]="['/reporteCobro']">Reportes Cobros</a></li>
+                    <hr class="dropdown-divider">
+                    <li><a class="dropdown-item" [routerLink]="['/reporteRecaudo']">Reportes diarios Recaudos</a></li>
                     <li>
                         <hr class="dropdown-divider">
                     </li>
                     <li><a class="dropdown-item" [routerLink]="['/reporteTiempoReal']">Reportes de tiempo real</a></li>
                     <li>
-                      <hr class="dropdown-divider">
                   </li>
-                  <li><a class="dropdown-item" [routerLink]="['/reporteCobro']">Reportes</a></li>
                   </ul>
             </li>
 

@@ -6,10 +6,16 @@
       "user": [
         {
             "id":1,
-            "usuario": "kevin",
-            "password": "kevin",
-            "rol": "agente"
-        }
+            "usuario": "juan",
+            "password": "juan",
+            "rol": "USER"
+        },
+        {
+          "id":1,
+          "usuario": "carlos",
+          "password": "carlos",
+          "rol": "ADMIN"
+      }
       ]
     }
   }

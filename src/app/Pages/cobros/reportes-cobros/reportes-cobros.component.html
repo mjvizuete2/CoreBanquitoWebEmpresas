@@ -30,7 +30,7 @@
                                     <th scope="col" id="title">Tipo</th>
                                     <th scope="col" id="title">Frecuencia</th>
                                     <th scope="col" id="title">Cancelado</th>
-                                    <th *ngIf="usuario.rol == 'admin'" scope="col" id="title">Acciones</th>
+                                    <th *ngIf="usuario.rol == 'ADMIN'" scope="col" id="title">Acciones</th>
 
                                 </tr>
                             </thead>
@@ -48,9 +48,9 @@
                                   <td>{{ cobro.tipo }}</td>
                                   <td>{{ cobro.frecuencia }}</td>
                                   <td>{{ cobro.cancelado }}</td>
-                                  <td *ngIf="usuario.rol == 'admin'">
-                                    <button class="btn btn-primary btn-sm mr-2" (click)="pagarCobro(cobro)">Pagar</button>
-                                    <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Cancelar</button>
+                                  <td *ngIf="usuario.rol == 'ADMIN'">
+                                    <button class="btn btn-primary btn-sm mr-2" (click)="pagarCobro(cobro)">Autorizar</button>
+                                    <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Rechazar</button>
                                   </td>
 
                                 </tr>
