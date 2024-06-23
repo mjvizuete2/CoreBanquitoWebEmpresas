@@ -11,25 +11,27 @@
             <div class="row">
                 <div class="">
                     <form [formGroup]="cuentasForm" (ngSubmit)="onSubmit()" class="d-flex flex-wrap">
-                        <div class="form-group flex-grow-1">
-                            <select id="cuentas" formControlName="cuentas" class="form-control" [ngClass]="{'is-invalid': submitted && f['cuentas'].errors}">
-                                <option value="">Selecciona una cuenta</option>
-                                <option *ngFor="let cuenta of cuentas" [value]="cuenta">{{ cuenta }}</option>
-                            </select>
-                            <div *ngIf="submitted && f['cuentas'].errors" class="invalid-feedback custom-invalid-feedback">
-                                <div *ngIf="f['cuentas'].errors['required']">La cuenta es requerida</div>
-                            </div>
-                        </div>       
+                      <div class="form-group me-2" style="flex: 1;">
+                        <label for="cuenta">Cuenta a acreditar</label>
+                        <select id="cuenta" formControlName="cuenta" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f['cuentas'].errors}">
+                            <option value="">Seleccione una cuenta</option>
+                            <option *ngFor="let cuenta of cuentas" [value]="cuenta.accountNumber">
+                                {{ cuenta.accountNumber }}
+                            </option>
+                        </select>
+                        <div *ngIf="submitted && f['cuentas'].errors" class="invalid-feedback custom-invalid-feedback">
+                            <div *ngIf="f['cuentas'].errors['required']">La cuenta a acreditar es requerida</div>
+                        </div>
+                      </div>
                         <div class="form-group flex-grow-1">
                             <select id="tipo" formControlName="tipo" class="form-control" [ngClass]="{'is-invalid': submitted && f['tipo'].errors}">
                                 <option value="">Selecciona un tipo de consulta</option>
                                 <option value="ultimosMovs">Últimos movimientos</option>
                                 <option value="rangoFecha">Por rango de fecha</option>
                             </select>
-                            <div *ngIf="submitted && f['tipo'].errors" class="invalid-feedback custom-invalid-feedback">
-                                <div *ngIf="f['tipo'].errors['required']">El tipo de consulta es requerido</div>
-                            </div>
-                        </div>  
+
+                        </div>
                         <div class="w-100"></div> <!-- Línea para forzar un salto de línea -->
                         <div class="form-group flex-grow-1 mt-2">
                             <div *ngIf="cuentasForm.get('tipo')?.value === 'rangoFecha'">
@@ -42,41 +44,47 @@
                                 <label for="fechaFin">Fecha de fin</label>
                                 <input type="date" id="fechaFin" formControlName="fechaFin" class="form-control">
                             </div>
-                        </div>                
+                        </div>
                         <div class="ml-auto mt-2">
                             <button type="submit" class="btn btn-primary button-color">Consultar</button>
                         </div>
                     </form>
                 </div>
             </div>
-            
+
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="card custom-card-background" style="padding: 20px;">
-                        <table class="table" *ngIf="submitted && cuentasForm.valid">
-                            <thead>
-                                <tr>
-                                    <th scope="col" id="title">Fecha</th>
-                                    <th scope="col" id="title">Concepto</th>
-                                    <th scope="col" id="title">Documento</th>
-                                    <th scope="col" id="title">Tipo</th>
-                                    <th scope="col" id="title">Oficina</th>
-                                    <th scope="col" id="title">Monto</th>
-                                    <th scope="col" id="title">Saldo contable</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let mov of movimientos">
-                                    <td>{{ mov.fecha }}</td>
-                                    <td>{{ mov.concepto }}</td>
-                                    <td>{{ mov.documento }}</td>
-                                    <td>{{ mov.tipo }}</td>
-                                    <td>{{ mov.oficina }}</td>
-                                    <td>{{ mov.monto }}</td>
-                                    <td>{{ mov.saldoContable }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                      <table class="table" >
+                        <thead>
+                            <tr>
+                                <th scope="col">Client ID</th>
+                                <th scope="col">Código de Cuenta Único</th>
+                                <th scope="col">Código de Cuenta Interna</th>
+                                <th scope="col">Código de Cuenta Internacional</th>
+                                <th scope="col">Número</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col">Saldo Actual</th>
+                                <th scope="col">Saldo Disponible</th>
+                                <th scope="col">Saldo Bloqueado</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr *ngFor="let mov of movimientos">
+
+                                <td>{{ mov.clientId }}</td>
+                                <td>{{ mov.codeUniqueAccount }}</td>
+                                <td>{{ mov.codeInternalAccount }}</td>
+                                <td>{{ mov.codeInternationalAccount }}</td>
+                                <td>{{ mov.number }}</td>
+                                <td>{{ mov.state }}</td>
+                                <td>{{ mov.currentBalance }}</td>
+                                <td>{{ mov.availableBalance }}</td>
+                                <td>{{ mov.blockedBalance }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
                     </div>
                 </div>
             </div>

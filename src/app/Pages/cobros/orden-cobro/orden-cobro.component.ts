@@ -1,37 +1,48 @@
+// orden-cobro.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as XLSX from 'xlsx';
 import { AuthService } from 'src/app/Services/auth.service';
-import { count } from 'rxjs';
+import { OrdenesService } from 'src/app/Services/ordenes.service';
+
 @Component({
   selector: 'app-orden-cobro',
   templateUrl: './orden-cobro.component.html',
   styleUrls: ['./orden-cobro.component.css']
 })
-
-export class OrdenCobroComponent implements OnInit{
-  usuario:any;
-  excelData:any;
+export class OrdenCobroComponent implements OnInit {
+  usuario: any;
+  excelData: any;
   cobroForm!: FormGroup;
   submitted = false;
+  empresa: any;
+  idEmpresa: any;
+  cuentas:any;
 
-  constructor(private formBuilder: FormBuilder,private authService:AuthService) {
-    this.usuario=authService.getUser();
-   }
-
-
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private ordenesService: OrdenesService
+  ) {
+    this.usuario = authService.getUser();
+    this.obtenerEmpresa();
+  }
 
   ngOnInit(): void {
-
     this.cobroForm = this.formBuilder.group({
       order_id: ['', Validators.required],
       account_id: ['', Validators.required],
       start_date: ['', Validators.required],
       due_date: ['', Validators.required],
       file: ['', Validators.required],
-      type: ['', Validators.required]
-      // frecuencia: ['', Validators.required]
+      type: ['', Validators.required],
+      empresa: [''],
+      orders_items: [],
+      records: 0,
+      total_amount: 0
     });
+
   }
 
   get f() { return this.cobroForm.controls; }
@@ -39,7 +50,6 @@ export class OrdenCobroComponent implements OnInit{
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
     if (file) {
-      // Aquí puedes procesar el archivo Excel
       this.processExcel(file);
     }
   }
@@ -49,21 +59,54 @@ export class OrdenCobroComponent implements OnInit{
     fileReader.onload = (e: any) => {
       const data = new Uint8Array(e.target.result);
       const workbook = XLSX.read(data, { type: 'array' });
-      // Aquí puedes trabajar con el contenido del archivo Excel
       this.handleExcelData(workbook);
     };
     fileReader.readAsArrayBuffer(file);
   }
 
   handleExcelData(workbook: XLSX.WorkBook) {
-    // Aquí puedes acceder a las hojas del archivo Excel y realizar el procesamiento necesario
     const firstSheetName = workbook.SheetNames[0];
     const worksheet = workbook.Sheets[firstSheetName];
     this.excelData = XLSX.utils.sheet_to_json(worksheet, { raw: true });
   }
 
+  obtenerEmpresa(): void {
+    const currentUserStr = localStorage.getItem('currentUser');
+    if (currentUserStr) {
+      const currentUser = JSON.parse(currentUserStr);
+      this.ordenesService.empresaxGmail(currentUser.email).subscribe(
+        response => {
+          this.empresa = response;
+          this.cobroForm.patchValue({
+            empresa: this.empresa[0],
+            orders_items: [],
+            records: 0,
+            total_amount: 0
+          });
 
-  onSubmit() {
+          this.obtenerCuentasEmpresa(this.empresa.id);
+        },
+        error => {
+          console.error('Error al obtener la empresa:', error);
+        }
+      );
+    } else {
+      console.error('No se encontró currentUser en localStorage.');
+    }
+  }
+
+  obtenerCuentasEmpresa(idEmpresa: string): void {
+    this.ordenesService.cuentasxempresa(idEmpresa).subscribe(
+      response => {
+        this.cuentas = response;
+      },
+      error => {
+        console.error('Error al obtener las cuentas de la empresa:', error);
+      }
+    );
+  }
+
+  onSubmit(): void {
     this.submitted = true;
 
     if (this.cobroForm.invalid) {
@@ -75,20 +118,20 @@ export class OrdenCobroComponent implements OnInit{
     }));
 
     const totalAmount = this.excelData.reduce((total: number, row: any) => {
-      // Verificar si row.total es un número válido antes de sumarlo
-      const rowTotal = parseFloat(row.total); // Convertir a número (si es necesario)
+      const rowTotal = parseFloat(row.owedAmount);
       if (!isNaN(rowTotal)) {
         return total + rowTotal;
       } else {
-        return total; // No sumar si row.total no es un número válido
+        return total;
       }
     }, 0);
 
+    this.cobroForm.patchValue({
+      orders_items: itemOrders,
+      records: itemOrders.length,
+      total_amount: totalAmount
+    });
 
-    this.cobroForm.value.orders_items = itemOrders;
-    this.cobroForm.value.records = itemOrders.length;
-    this.cobroForm.value.total_amount = totalAmount;
     console.log(this.cobroForm.value);
-
   }
 }

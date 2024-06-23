@@ -22,17 +22,22 @@
                                         <div *ngIf="f['order_id'].errors['required']">La referencia es requerida</div>
                                     </div>
                                 </div>
-                                <div class="form-group ms-2" style="flex: 1;">
-                                    <label id="label" for="account_id">Cuenta a acreditar</label>
-                                    <input type="account_id" id="account_id" formControlName="account_id"
-                                        class="form-control"
-                                        [ngClass]="{'is-invalid': submitted && f['account_id'].errors}" />
-                                    <div *ngIf="submitted && f['account_id'].errors"
-                                        class="invalid-feedback custom-invalid-feedback">
-                                        <div *ngIf="f['account_id'].errors['required']">La cuenta a acreditar es
-                                            requerida</div>
-                                    </div>
+
+                                <div class="form-group me-2" style="flex: 1;">
+                                  <label for="account_id">Cuenta a acreditar</label>
+                                  <select id="account_id" formControlName="account_id" class="form-control"
+                                          [ngClass]="{'is-invalid': submitted && f['account_id'].errors}">
+                                      <option value="">Seleccione una cuenta</option>
+                                      <option *ngFor="let cuenta of cuentas" [value]="cuenta.id">
+                                          {{ cuenta.accountNumber }}
+                                      </option>
+                                  </select>
+                                  <div *ngIf="submitted && f['account_id'].errors" class="invalid-feedback custom-invalid-feedback">
+                                      <div *ngIf="f['account_id'].errors['required']">La cuenta a acreditar es requerida</div>
+                                  </div>
                                 </div>
+
+
                             </div>
                             <div class="d-flex justify-content-between">
 
@@ -65,8 +70,8 @@
                               <select id="type" formControlName="type" class="form-control"
                                   [ngClass]="{'is-invalid': submitted && f['type'].errors}">
                                   <option value="">Selecciona un tipo</option>
-                                  <option value="Orden">Orden</option>
-                                  <option value="Recaudo">Recaudo</option>
+                                  <option value="COB">Cobro</option>
+                                  <option value="REC">Recaudo</option>
                               </select>
                               <div *ngIf="submitted && f['type'].errors" class="invalid-feedback custom-invalid-feedback">
                                   <div *ngIf="f['type'].errors['required']">El tipo es requerido</div>

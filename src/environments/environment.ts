@@ -4,8 +4,10 @@
 
 export const environment = {
   production: false,
-  url_back: 'https://9sn1ct91-8081.use.devtunnels.ms',
+  url_back: 'https://9sn1ct91-8080.use.devtunnels.ms',
   url_backlogin: 'https://9sn1ct91-8082.use.devtunnels.ms',
+  url_backtransacciones: 'https://9sn1ct91-8083.use.devtunnels.ms',
+
   x_token: 'S05EU0dKS0FTSklFVFVOVlNERklBSU8kJS8jU0pUSUVSVFU5ODRVV0VSVzBST0ZKS1NETlZLRTlXMjNVVDlXRVVTRE9KRlNXMFJJK3s',
 };
 

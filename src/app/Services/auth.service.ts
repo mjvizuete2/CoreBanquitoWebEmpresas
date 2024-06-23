@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable,of } from 'rxjs';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { OrdenesService } from './ordenes.service';
 @Injectable({
@@ -10,9 +10,12 @@ import { OrdenesService } from './ordenes.service';
 export class AuthService {
   private apiUrl = environment.url_backlogin; // Usa la ruta relativa definida en el proxy
 
-  constructor(private http: HttpClient,private ordenesService: OrdenesService) {}
+  constructor(private http: HttpClient,private empresa: OrdenesService) {}
+
 
   login(userName: string, password: string): Observable<boolean> {
+
+
     return this.http.put<{
       id: number,
       codeRole: string,
@@ -26,38 +29,24 @@ export class AuthService {
       lastLogin: string,
       email: string,
       fullName: string
-    }>(`${this.apiUrl}/login`, { userName, password })
+    }>(this.apiUrl+'/login', { userName, password })
       .pipe(
-        switchMap(response => {
+        map(response => {
           if (response.userName === userName) {
-            return this.ordenesService.empresaxGmail(response.fullName).pipe(
-              map(empresaResponse => {
-                localStorage.setItem('currentUser', JSON.stringify({
-                  usuario: response.userName,
-                  rol: response.codeRole,
-                  fullName: response.fullName,
-                  email: response.email,
-                  lastLogin: response.lastLogin,
-                  empresa: empresaResponse
-                }));
-                return true;
-              }),
-              catchError(error => {
-                console.error('Error fetching empresa:', error);
-                return of(false);
-              })
-            );
+            localStorage.setItem('currentUser', JSON.stringify({
+              usuario: response.userName,
+              rol: response.codeRole,
+              fullName: response.fullName,
+              email: response.email,
+              lastLogin: response.lastLogin
+            }));
+            return true;
           } else {
-            return of(false);
+            return false;
           }
-        }),
-        catchError(error => {
-          console.error('Login error:', error);
-          return of(false);
-        })
-      );
+       })
+  );
   }
-
 
   logout(): void {
     // Eliminar la información del usuario de localStorage o sessionStorage
