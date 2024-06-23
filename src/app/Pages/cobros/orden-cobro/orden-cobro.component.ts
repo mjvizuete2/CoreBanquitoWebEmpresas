@@ -1,10 +1,10 @@
-// orden-cobro.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as XLSX from 'xlsx';
 import { AuthService } from 'src/app/Services/auth.service';
 import { OrdenesService } from 'src/app/Services/ordenes.service';
+import { concatMap } from 'rxjs/operators';
+import { Observable,of } from 'rxjs';
 
 @Component({
   selector: 'app-orden-cobro',
@@ -18,7 +18,7 @@ export class OrdenCobroComponent implements OnInit {
   submitted = false;
   empresa: any;
   idEmpresa: any;
-  cuentas:any;
+  cuentas: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +42,6 @@ export class OrdenCobroComponent implements OnInit {
       records: 0,
       total_amount: 0
     });
-
   }
 
   get f() { return this.cobroForm.controls; }
@@ -114,7 +113,13 @@ export class OrdenCobroComponent implements OnInit {
     }
 
     const itemOrders = this.excelData.map((row: any) => ({
-      ...row
+      debtorName: row.debtorName,
+      identificationType: row.identificationType,
+      identification: row.identification,
+      debitAccount: row.debitAccount,
+      owedAccount: row.owedAccount,
+      counterpart: row.counterpart,
+      status: '1'
     }));
 
     const totalAmount = this.excelData.reduce((total: number, row: any) => {
@@ -133,5 +138,57 @@ export class OrdenCobroComponent implements OnInit {
     });
 
     console.log(this.cobroForm.value);
+
+    this.ordenesService.insertarOrdenCobro(
+      this.cobroForm.value.empresa.id,
+      this.cobroForm.value.account_id,
+      this.cobroForm.value.type,
+      this.cobroForm.value.order_id,  // Ajusta este campo según sea necesario
+      this.cobroForm.value.start_date
+    ).pipe(
+      concatMap(() => {
+        return this.ordenesService.insertarOrden(
+          this.cobroForm.value.start_date,
+          this.cobroForm.value.due_date,
+          this.cobroForm.value.total_amount.toString(),
+          this.cobroForm.value.records.toString()
+        );
+      }),
+      concatMap((ordenResponse: any) => {
+        const orderId = ordenResponse.id;  // Obtener el ID de la orden creada
+        console.log(orderId);
+        // Mapear cada itemOrder para insertarlo secuencialmente
+        return this.insertarItemOrdersSequentially(orderId, this.cobroForm.value.orders_items);
+      })
+    ).subscribe(
+      (result: any) => {
+        console.log('Inserciones realizadas con éxito:', result);
+        // Aquí puedes manejar cualquier lógica adicional después de las inserciones
+      },
+      error => {
+        console.error('Error al realizar las inserciones:', error);
+      }
+    );
+  }
+
+  insertarItemOrdersSequentially(orderId: string, itemOrders: any[]): Observable<any> {
+    const observables = itemOrders.map(itemOrder => {
+      return this.ordenesService.insertarItemOrden(
+        itemOrder.debtorName,
+        itemOrder.identificationType,
+        itemOrder.identification,
+        itemOrder.debitAccount,
+        itemOrder.owedAccount,
+        itemOrder.counterpart,
+        '1'
+      );
+    });
+
+    // Utilizamos reduce para encadenar las inserciones secuencialmente usando concatMap
+    return observables.reduce((prev, curr) => {
+      return prev.pipe(
+        concatMap(() => curr)
+      );
+    }, of(null));
   }
 }
