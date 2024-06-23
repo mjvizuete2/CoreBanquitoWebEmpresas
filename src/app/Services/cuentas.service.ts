@@ -26,7 +26,7 @@ export class CuentasService {
   }
 
   public transaccionesxCuenta(countNumber:any){
-    return this.http.get<any>(`${this.apiUrlTransacciones}/accounts/by-unique-code/${countNumber}`, this.header);
+    return this.http.get<any>(`${this.apiUrlTransacciones}/account-transactions/transactions?codeUniqueAccount=${countNumber}`, this.header);
   }
 
 }

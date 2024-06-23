@@ -13,7 +13,7 @@ import { ChangeDetectorRef } from '@angular/core';
 export class CuentasComponent implements OnInit {
   cuentasForm!: FormGroup;
   public cuentas: any;
-  movimientos: any;
+  movimientos: any[] = [];
   usuario: any;
   submitted = false;
   empresa: any;
@@ -32,10 +32,7 @@ export class CuentasComponent implements OnInit {
 
   ngOnInit(): void {
     this.cuentasForm = this.formBuilder.group({
-      cuenta: [''],
-      tipo: ['', Validators.required],
-      fechaInicio: [''],
-      fechaFin: [''],
+      cuenta: ['', Validators.required]
     });
   }
 
@@ -73,13 +70,15 @@ export class CuentasComponent implements OnInit {
   }
 
   cargarMovimientosCuentas(countNumber: any): void {
+    console.log('Cargando movimientos para la cuenta:', countNumber.cuenta);
     this.cuentasService.transaccionesxCuenta(countNumber.cuenta).subscribe(
       res => {
+        console.log('Movimientos recibidos:', res);
         this.movimientos = res;
-        this.cdr.detectChanges();
+        this.cdr.detectChanges(); // Asegúrate de que Angular detecte los cambios
       },
       error => {
-        console.error('Error al obtener las cuentas de la empresa:', error);
+        console.error('Error al obtener los movimientos de la cuenta:', error);
       }
     );
   }
@@ -88,6 +87,7 @@ export class CuentasComponent implements OnInit {
     this.submitted = true;
     if (this.cuentasForm.valid) {
       const credentials = this.cuentasForm.value;
+      console.log('Formulario enviado con:', credentials);
       this.cargarMovimientosCuentas(credentials);
     }
   }
