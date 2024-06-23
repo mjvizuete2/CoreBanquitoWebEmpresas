@@ -1,6 +1,6 @@
 {
     "/": {
-        "target": "http://localhost:8080",
+        "target": "https://9sn1ct91-8081.use.devtunnels.ms",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"

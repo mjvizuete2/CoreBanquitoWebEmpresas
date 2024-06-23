@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url_back: 'http://localhost:8080',
+  url_back: 'https://9sn1ct91-8081.use.devtunnels.ms',
+  url_backlogin: 'https://9sn1ct91-8082.use.devtunnels.ms',
   x_token: 'S05EU0dKS0FTSklFVFVOVlNERklBSU8kJS8jU0pUSUVSVFU5ODRVV0VSVzBST0ZKS1NETlZLRTlXMjNVVDlXRVVTRE9KRlNXMFJJK3s',
 };
 
