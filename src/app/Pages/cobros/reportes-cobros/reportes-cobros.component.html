@@ -4,17 +4,16 @@
     </div>
     <span class="navbar-text position-absolute" *ngIf="usuario" style="right: 20px; top: 20px; font-size: 20px;">
         Bienvenido, {{ usuario.fullName}}!
-      </span>
-    <div class="content">
+    </span>
+    <div class="d-flex flex-column align-items-center" style="width: 100%;">
+
+        <img src="assets/logo-Banquito.png" class="img-fluid invisible-image"
+            style="max-height: 100px; margin-bottom: 20px;">
         <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
-            <h3 class="text-center">REPORTES DE COBROS</h3>
-
-
+            <h3 class="text-center">REPORTES DE COBROS PENDIENTES</h3>
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="card custom-card-background" style="padding: 20px;">
-
-
                         <table class="table">
                             <thead>
                                 <tr>
@@ -32,19 +31,20 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let cobro of cobros">
-                                  <td>{{ cobro.debtorName }}</td>
-                                  <td>{{ cobro.identificationType }}</td>
-                                  <td>{{ cobro.identification }}</td>
-                                  <td>{{ cobro.debitAccount }}</td>
-                                  <td>{{ cobro.owedAmount }}</td>
-                                  <td>{{ cobro.dueDate }}</td>
-                                  <td>{{ cobro.status }}</td>
-                                  
-                                  
-                                  <td *ngIf="usuario.rol == 'ADMIN'">
-                                    <button class="btn btn-primary btn-sm mr-2" (click)="pagarCobro(cobro.orderItemId)">Cambiar estado</button>
-                                    <!-- <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Rechazar</button> -->
-                                  </td>
+                                    <td>{{ cobro.debtorName }}</td>
+                                    <td>{{ cobro.identificationType }}</td>
+                                    <td>{{ cobro.identification }}</td>
+                                    <td>{{ cobro.debitAccount }}</td>
+                                    <td>{{ cobro.owedAmount }}</td>
+                                    <td>{{ cobro.dueDate }}</td>
+                                    <td>{{ cobro.status }}</td>
+
+
+                                    <td *ngIf="usuario.rol == 'ADMIN'">
+                                        <button class="btn btn-primary btn-sm mr-2"
+                                            (click)="pagarCobro(cobro.orderItemId)">Cambiar estado</button>
+                                        <!-- <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Rechazar</button> -->
+                                    </td>
 
                                 </tr>
                             </tbody>

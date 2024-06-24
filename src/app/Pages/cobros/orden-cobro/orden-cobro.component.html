@@ -4,100 +4,112 @@
     </div>
     <span class="navbar-text position-absolute" *ngIf="usuario" style="right: 20px; top: 20px; font-size: 20px;">
         Bienvenido, {{ usuario.fullName}}!
-      </span>
-    <div class="content d-flex align-items-center justify-content-center" style="min-height: 100vh;">
-        <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
-            <h3 class="text-center">ORDEN COBROS</h3>
-            <div class="col-md-12 d-flex align-items-center justify-content-center">
-                <div class="card mt-5 custom-card-background background-color" style="width: 100%; padding:50px ">
-                    <div class="card-body">
-                        <form [formGroup]="cobroForm" (ngSubmit)="onSubmit()">
-                            <div class="d-flex justify-content-between">
-                                <div class="form-group me-2" style="flex: 1;">
-                                    <label id="label" for="order_id">Referencia</label>
-                                    <input type="text" id="order_id" formControlName="order_id" class="form-control"
-                                        [ngClass]="{'is-invalid': submitted && f['order_id'].errors}" />
-                                    <div *ngIf="submitted && f['order_id'].errors"
-                                        class="invalid-feedback custom-invalid-feedback">
-                                        <div *ngIf="f['order_id'].errors['required']">La referencia es requerida</div>
+    </span>
+    <div class="d-flex flex-column align-items-center" style="width: 100%;">
+
+        <img src="assets/logo-Banquito.png" class="img-fluid invisible-image"
+            style="max-height: 100px; margin-bottom: 20px;">
+            <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
+                <h3 class="text-center">INGRESO DE ORDEN</h3>
+                <div class="col-md-12 d-flex align-items-center justify-content-center">
+                    <div class="card mt-5 custom-card-background background-color" style="width: 100%; padding:50px ">
+                        <div class="card-body">
+                            <form [formGroup]="cobroForm" (ngSubmit)="onSubmit()">
+
+                                <div class="d-flex justify-content-between">
+
+                                    <div class="form-group ms-2" style="flex: 1;">
+                                        <label id="label" for="order_id">Referencia</label>
+                                        <input type="text" id="order_id" formControlName="order_id" class="form-control"
+                                            [ngClass]="{'is-invalid': submitted && f['order_id'].errors}" />
+                                        <div *ngIf="submitted && f['order_id'].errors"
+                                            class="invalid-feedback custom-invalid-feedback">
+                                            <div *ngIf="f['order_id'].errors['required']">La referencia es requerida
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group me-2" style="flex: 1;">
-                                  <label for="account_id">Cuenta a acreditar</label>
-                                  <select id="account_id" formControlName="account_id" class="form-control"
-                                          [ngClass]="{'is-invalid': submitted && f['account_id'].errors}">
-                                      <option value="">Seleccione una cuenta</option>
-                                      <option *ngFor="let cuenta of cuentas" [value]="cuenta.id">
-                                          {{ cuenta.accountNumber }}
-                                      </option>
-                                  </select>
-                                  <div *ngIf="submitted && f['account_id'].errors" class="invalid-feedback custom-invalid-feedback">
-                                      <div *ngIf="f['account_id'].errors['required']">La cuenta a acreditar es requerida</div>
-                                  </div>
-                                </div>
-
-
-                            </div>
-                            <div class="d-flex justify-content-between">
-
-                                <div class="form-group ms-2" style="flex: 1;">
-                                    <label id="label" for="start_date">Fecha de inicio</label>
-                                    <input type="date" id="start_date" formControlName="start_date"
-                                        class="form-control"
-                                        [ngClass]="{'is-invalid': submitted && f['start_date'].errors}" />
-                                    <div *ngIf="submitted && f['start_date'].errors"
-                                        class="invalid-feedback custom-invalid-feedback">
-                                        <div *ngIf="f['start_date'].errors['required']">La fecha de inicio es requerida
+                                    <div class="form-group ms-2" style="flex: 1;">
+                                        <label id="label" for="account_id">Cuenta a acreditar</label>
+                                        <select id="account_id" formControlName="account_id" class="form-control"
+                                            [ngClass]="{'is-invalid': submitted && f['account_id'].errors}">
+                                            <option value="">Seleccione una cuenta</option>
+                                            <option *ngFor="let cuenta of cuentas" [value]="cuenta.id">
+                                                {{ cuenta.accountNumber }}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="submitted && f['account_id'].errors"
+                                            class="invalid-feedback custom-invalid-feedback">
+                                            <div *ngIf="f['account_id'].errors['required']">La Cuenta a acreditar es
+                                                requerida</div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="d-flex justify-content-between">
 
-                                <div class="form-group ms-2" style="flex: 1;">
-                                  <label id="label" for="due_date">Fecha de vencimiento</label>
-                                  <input type="date" id="due_date" formControlName="due_date"
-                                      class="form-control"
-                                      [ngClass]="{'is-invalid': submitted && f['due_date'].errors}" />
-                                  <div *ngIf="submitted && f['due_date'].errors"
-                                      class="invalid-feedback custom-invalid-feedback">
-                                      <div *ngIf="f['due_date'].errors['required']">La fecha de vencimiento es
-                                          requerida</div>
-                                  </div>
-                              </div>
-                            </div>
-                            <div class="form-group ms-2" style="flex: 1;">
-                              <label for="type">Tipo</label>
-                              <select id="type" formControlName="type" class="form-control"
-                                  [ngClass]="{'is-invalid': submitted && f['type'].errors}">
-                                  <option value="">Selecciona un tipo</option>
-                                  <option value="COB">Cobro</option>
-                                  <option value="REC">Recaudo</option>
-                              </select>
-                              <div *ngIf="submitted && f['type'].errors" class="invalid-feedback custom-invalid-feedback">
-                                  <div *ngIf="f['type'].errors['required']">El tipo es requerido</div>
-                              </div>
-                          </div>
-                            <div class="form-group ms-2" style="flex: 1;">
-                                <label id="label" for="file">Archivo</label>
-                                <input type="file" id="file" formControlName="file" class="form-control" (change)="onFileSelected($event)" [ngClass]="{'is-invalid': submitted && f['file'].errors}" >
+                                    <div class="form-group ms-2" style="flex: 1;">
+                                        <label id="label" for="start_date">Fecha de inicio</label>
+                                        <input type="date" id="start_date" formControlName="start_date"
+                                            class="form-control"
+                                            [ngClass]="{'is-invalid': submitted && f['start_date'].errors}" />
+                                        <div *ngIf="submitted && f['start_date'].errors"
+                                            class="invalid-feedback custom-invalid-feedback">
+                                            <div *ngIf="f['start_date'].errors['required']">La fecha de inicio es
+                                                requerida</div>
+                                            <div *ngIf="f['start_date'].errors['min']">La fecha de inicio debe ser
+                                                mayor que la fecha de inicio</div>
+                                        </div>
+                                    </div>
 
-                                <div *ngIf="submitted && f['file'].errors"
-                                    class="invalid-feedback custom-invalid-feedback">
-                                    <div *ngIf="f['file'].errors['required']">La fecha de vencimiento es
-                                        requerida</div>
+                                    <div class="form-group ms-2" style="flex: 1;">
+                                        <label id="label" for="due_date">Fecha de vencimiento</label>
+                                        <input type="date" id="due_date" formControlName="due_date" class="form-control"
+                                            [ngClass]="{'is-invalid': submitted && f['due_date'].errors}" />
+                                        <div *ngIf="submitted && f['due_date'].errors"
+                                            class="invalid-feedback custom-invalid-feedback">
+                                            <div *ngIf="f['due_date'].errors['required']">La fecha de vencimiento es
+                                                requerida</div>
+                                            <div *ngIf="f['due_date'].errors['min']">La fecha de vencimiento debe ser
+                                                mayor que la fecha de inicio</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="form-group ms-2" style="flex: 1;">
+                                    <label for="type">Tipo</label>
+                                    <select id="type" formControlName="type" class="form-control"
+                                        [ngClass]="{'is-invalid': submitted && f['type'].errors}">
+                                        <option value="">Selecciona un tipo</option>
+                                        <option value="COB">Cobro</option>
+                                        <option value="REC">Recaudo</option>
+                                    </select>
+                                    <div *ngIf="submitted && f['type'].errors"
+                                        class="invalid-feedback custom-invalid-feedback">
+                                        <div *ngIf="f['type'].errors['required']">El tipo es requerido</div>
+                                    </div>
+                                </div>
+                                <div class="form-group ms-2" style="flex: 1;">
+                                    <label id="label" for="file">Archivo</label>
+                                    <input type="file" id="file" formControlName="file" class="form-control"
+                                        (change)="onFileSelected($event)"
+                                        [ngClass]="{'is-invalid': submitted && f['file'].errors}">
+
+                                    <div *ngIf="submitted && f['file'].errors"
+                                        class="invalid-feedback custom-invalid-feedback">
+                                        <div *ngIf="f['file'].errors['required']">La fecha de vencimiento es
+                                            requerida</div>
+                                    </div>
+                                </div>
 
 
-                            <div class="d-flex flex-column align-items-center w-100">
-                                <button type="submit" class="btn btn-primary mt-3 w-100 button-color">Procesar</button>
-                            </div>
-                        </form>
+                                <div class="d-flex flex-column align-items-center w-100">
+                                    <button type="submit"
+                                        class="btn btn-primary mt-3 w-100 button-color">Procesar</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
 
 </div>

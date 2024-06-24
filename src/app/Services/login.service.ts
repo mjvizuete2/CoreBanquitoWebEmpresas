@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class LoginService {
-  private apiUrl = environment.url_back; 
+  private apiUrl = environment.CoreCobros_receivables; 
   private isLoggedInFlag: boolean = false;
 
   constructor(private http: HttpClient) {}

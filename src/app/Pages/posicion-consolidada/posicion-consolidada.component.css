@@ -20,3 +20,7 @@
 .custom-invalid-feedback {
   color: white;
 }
+
+.invisible-image {
+  visibility: hidden;
+}

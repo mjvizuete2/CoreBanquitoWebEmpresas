@@ -15,8 +15,8 @@ export class CuentasService {
       Accept: 'application/json',
     }),
   };
-  private apiUrl = environment.url_back;
-  private apiUrlTransacciones = environment.url_backtransacciones;
+  private apiUrl = environment.CoreCobros_receivables;
+  private apiUrlTransacciones = environment.CoreBanquito_account;
 
   constructor(private http: HttpClient) {}
 

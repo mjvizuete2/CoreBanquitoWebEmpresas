@@ -8,7 +8,7 @@ import { OrdenesService } from './ordenes.service';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = environment.url_backlogin; // Usa la ruta relativa definida en el proxy
+  private apiUrl = environment.CoreBanquito_bank; // Usa la ruta relativa definida en el proxy
 
   constructor(private http: HttpClient,private empresa: OrdenesService) {}
 

@@ -15,7 +15,7 @@ export class OrdenesService {
       Accept: 'application/json',
     }),
   };
-  private apiUrl = environment.url_back;
+  private apiUrl = environment.CoreCobros_receivables;
   constructor(private http: HttpClient) {
     this.idReceivable = this.generarIdUnico();
     this.idOrder = this.generarIdUnico();

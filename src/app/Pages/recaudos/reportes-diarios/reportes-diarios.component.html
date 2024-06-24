@@ -5,8 +5,10 @@
     <span class="navbar-text position-absolute" *ngIf="usuario" style="right: 20px; top: 20px; font-size: 20px;">
         Bienvenido, {{ usuario.fullName}}!
       </span>
-    <div class="content">
-        <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
+      <div class="d-flex flex-column align-items-center" style="width: 100%;">
+
+        <img src="assets/logo-Banquito.png" class="img-fluid invisible-image"
+            style="max-height: 100px; margin-bottom: 20px;">        <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
             <h3 class="text-center">REPORTES DIARIOS DE RECAUDOS</h3>
             <div class="row">
                 <div class="col-md-6">
@@ -40,29 +42,35 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col" id="title">Contrapartida</th>
-                                    <th scope="col" id="title">Nombres</th>
-                                    <th scope="col" id="title">Cédula</th>
-                                    <th scope="col" id="title">Número de contrato</th>
+                                    <th scope="col" id="title">Nombre del deudor</th>
+                                    <th scope="col" id="title">Tipo de identificación</th>
+                                    <th scope="col" id="title">Identificación</th>
                                     <th scope="col" id="title">Monto</th>
-                                    <th scope="col" id="title">Fecha de inicio</th>
                                     <th scope="col" id="title">Fecha de vencimiento</th>
-                                    <th scope="col" id="title">Cuenta a acreditar</th>
-                                    <th scope="col" id="title">Concepto</th>
+                                    <th scope="col" id="title">Contrapartida</th>
+                                    <th scope="col" id="title">Estado</th>
+
+
+                                    <th *ngIf="usuario.rol == 'ADMIN'" scope="col" id="title">Acciones</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let recaudo of recaudos">
-                                  <td>{{ recaudo.contrapartida }}</td>
-                                  <td>{{ recaudo.nombres }}</td>
-                                  <td>{{ recaudo.cedula }}</td>
-                                  <td>{{ recaudo.nContrato }}</td>
-                                  <td>{{ recaudo.monto }}</td>
-                                  <td>{{ recaudo.fechaInicio }}</td>
-                                  <td>{{ recaudo.fechaVencimiento }}</td>
-                                  <td>{{ recaudo.cuentaAcreditar }}</td>
-                                  <td>{{ recaudo.concepto }}</td>
+                                <tr *ngFor="let cobro of cobros">
+                                    <td>{{ cobro.debtorName }}</td>
+                                    <td>{{ cobro.identificationType }}</td>
+                                    <td>{{ cobro.identification }}</td>
+                                    <td>{{ cobro.owedAmount }}</td>
+                                    <td>{{ cobro.dueDate }}</td>
+                                    <td>{{ cobro.counterpart }}</td>
+                                    <td>{{ cobro.status }}</td>
+
+
+                                    <td *ngIf="usuario.rol == 'ADMIN'">
+                                        <button class="btn btn-primary btn-sm mr-2"
+                                            (click)="pagarCobro(cobro.orderItemId)">Cambiar estado</button>
+                                        <!-- <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Rechazar</button> -->
+                                    </td>
 
                                 </tr>
                             </tbody>

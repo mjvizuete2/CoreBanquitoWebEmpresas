@@ -17,7 +17,7 @@ export class PosConsolidadaService {
     }),
   };
 
-  private url: string = environment.url_back;
+  private url: string = environment.CoreCobros_receivables;
 
   constructor(private http: HttpClient) {}
 

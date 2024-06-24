@@ -1,79 +1,82 @@
 <div class="container-fluid">
-    <div class="menu d-flex flex-column align-items-center">
-        <app-menu></app-menu>
-    </div>
-    <span class="navbar-text position-absolute" *ngIf="usuario" style="right: 20px; top: 20px; font-size: 20px;">
-        Bienvenido, {{ usuario.fullName}}!
-      </span>
-    <div class="content">
-        <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
-            <h3 class="text-center">MOVIMIENTOS</h3>
-            <div class="row">
-                <div class="">
-                    <form [formGroup]="cuentasForm" (ngSubmit)="onSubmit()" class="d-flex flex-wrap">
-                      <div class="form-group me-2" style="flex: 1;">
-                        <label for="cuenta">Cuenta a consultar</label>
-                        <select id="cuenta" formControlName="cuenta" class="form-control"
-                                [ngClass]="{'is-invalid': submitted && f['cuenta'].errors}">
-                            <option value="">Seleccione una cuenta</option>
-                            <option *ngFor="let cuenta of cuentas" [value]="cuenta.accountNumber">
-                                {{ cuenta.accountNumber }}
-                            </option>
-                        </select>
-                        <div *ngIf="submitted && f['cuenta'].errors" class="invalid-feedback custom-invalid-feedback">
-                            <div *ngIf="f['cuenta'].errors['required']">La cuenta a acreditar es requerida</div>
-                        </div>
-                      </div>
-                        <div class="w-100"></div> <!-- Línea para forzar un salto de línea -->
-                        <div class="ml-auto mt-2">
-                            <button type="submit" class="btn btn-primary button-color">Consultar</button>
-                        </div>
-                    </form>
-                </div>
+  <div class="menu d-flex flex-column align-items-center">
+    <app-menu></app-menu>
+  </div>
+  <span class="navbar-text position-absolute" *ngIf="usuario" style="right: 20px; top: 20px; font-size: 20px;">
+    Bienvenido, {{ usuario.fullName}}!
+  </span>
+  <div class="d-flex flex-column align-items-center" style="width: 100%;">
+
+    <img src="assets/logo-Banquito.png" class="img-fluid invisible-image"
+      style="max-height: 100px; margin-bottom: 20px;">
+      <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
+        <h3 class="text-center">MOVIMIENTOS</h3>
+      <div class="row">
+        <div class="col-md-6">
+          <form [formGroup]="cuentasForm" (ngSubmit)="onSubmit()" class="d-flex flex-wrap">
+            <div class="form-group me-2" style="flex: 1;">
+              <label for="cuenta">Cuenta a consultar</label>
+              <select id="cuenta" formControlName="cuenta" class="form-control"
+                [ngClass]="{'is-invalid': submitted && f['cuenta'].errors}">
+                <option value="">Seleccione una cuenta</option>
+                <option *ngFor="let cuenta of cuentas" [value]="cuenta.accountNumber">
+                  {{ cuenta.accountNumber }}
+                </option>
+              </select>
+              <div *ngIf="submitted && f['cuenta'].errors" class="invalid-feedback custom-invalid-feedback">
+                <div *ngIf="f['cuenta'].errors['required']">La cuenta a acreditar es requerida</div>
+              </div>
             </div>
-
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <div class="card custom-card-background" style="padding: 20px;">
-                      <table class="table" *ngIf="movimientos.length > 0">
-                        <thead>
-                          <tr>
-                            <th scope="col">Account ID</th>
-                            <th scope="col">Monto</th>
-                            <th scope="col">Impuesto aplicado</th>
-                            <th scope="col">Canal</th>
-                            <th scope="col">Fecha de creación</th>
-                            <th scope="col">Cuenta de Acreedor</th>
-                            <th scope="col">Cuenta Debitada</th>
-                            <th scope="col">Referencia</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Subtipo de Transacción</th>
-                            <th scope="col">Tipo de Transaction </th>
-                            <th scope="col">Clave Única</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngFor="let mov of movimientos">
-                            <td>{{ mov.accountId }}</td>
-                            <td>{{ mov.ammount }}</td>
-                            <td>{{ mov.applyTax }}</td>
-                            <td>{{ mov.codeChannel }}</td>
-                            <td>{{ mov.creationDate }}</td>
-                            <td>{{ mov.creditorAccount }}</td>
-                            <td>{{ mov.debitorAccount }}</td>
-                            <td>{{ mov.reference }}</td>
-                            <td>{{ mov.state }}</td>
-                            <td>{{ mov.transactionSubtype }}</td>
-                            <td>{{ mov.transactionType }}</td>
-                            <td>{{ mov.uniqueKey }}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-
-                    </div>
-                </div>
+            <div class="w-100"></div> <!-- Línea para forzar un salto de línea -->
+            <div class="ml-auto mt-2">
+              <button type="submit" class="btn btn-primary button-color">Consultar</button>
             </div>
-
+          </form>
         </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <div class="card custom-card-background" style="padding: 20px;">
+            <table class="table" *ngIf="movimientos.length > 0">
+              <thead>
+                <tr>
+                  <th scope="col">Account ID</th>
+                  <th scope="col">Monto</th>
+                  <th scope="col">Impuesto aplicado</th>
+                  <th scope="col">Canal</th>
+                  <th scope="col">Fecha de creación</th>
+                  <th scope="col">Cuenta de Acreedor</th>
+                  <th scope="col">Cuenta Debitada</th>
+                  <th scope="col">Referencia</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Subtipo de Transacción</th>
+                  <th scope="col">Tipo de Transaction </th>
+                  <th scope="col">Clave Única</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let mov of movimientos">
+                  <td>{{ mov.accountId }}</td>
+                  <td>{{ mov.ammount }}</td>
+                  <td>{{ mov.applyTax }}</td>
+                  <td>{{ mov.codeChannel }}</td>
+                  <td>{{ mov.creationDate }}</td>
+                  <td>{{ mov.creditorAccount }}</td>
+                  <td>{{ mov.debitorAccount }}</td>
+                  <td>{{ mov.reference }}</td>
+                  <td>{{ mov.state }}</td>
+                  <td>{{ mov.transactionSubtype }}</td>
+                  <td>{{ mov.transactionType }}</td>
+                  <td>{{ mov.uniqueKey }}</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+
     </div>
+  </div>
 </div>

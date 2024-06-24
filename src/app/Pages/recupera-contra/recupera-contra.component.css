@@ -31,3 +31,7 @@
     border: none;
   }
   
+
+  .invisible-image {
+    visibility: hidden;
+  }

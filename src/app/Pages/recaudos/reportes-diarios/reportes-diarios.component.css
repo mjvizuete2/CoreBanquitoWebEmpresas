@@ -16,3 +16,6 @@
     color: black;
     border-color: #BFE7ED;
 }
+.invisible-image {
+  visibility: hidden;
+}

@@ -4,13 +4,40 @@
     </div>
     <span class="navbar-text position-absolute" *ngIf="usuario" style="right: 20px; top: 20px; font-size: 20px;">
         Bienvenido, {{ usuario.fullName}}!
-      </span>
-    <div class="content">
+    </span>
+
+    <div class="d-flex flex-column align-items-center" style="width: 100%;">
+
+        <img src="assets/logo-Banquito.png" class="img-fluid invisible-image"
+            style="max-height: 100px; margin-bottom: 20px;">
         <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
             <h3 class="text-center">POSICIÓN CONSOLIDADA</h3>
             <div class="row">
                 <div class="col-md-6">
-                    <form [formGroup]="posForm" (ngSubmit)="onSubmit()" class="d-flex">
+
+                    <form [formGroup]="posForm" (ngSubmit)="onSubmit()" class="d-flex flex-wrap">
+                        <div class="form-group me-2" style="flex: 1;">
+                            <label for="cuentas">Cuenta a consultar</label>
+                            <select id="cuentas" formControlName="cuentas" class="form-control"
+                                [ngClass]="{'is-invalid': submitted && f['cuenta'].errors}">
+                                <option value="">Seleccione una cuenta</option>
+                                <option *ngFor="let cuenta of cuentas" [value]="cuenta">
+                                    {{ cuenta }}
+                                </option>
+                            </select>
+                            <div *ngIf="submitted && f['cuentas'].errors"
+                                class="invalid-feedback custom-invalid-feedback">
+                                <div *ngIf="f['cuentas'].errors['required']">La cuenta es requerida</div>
+                            </div>
+                        </div>
+                        <div class="w-100"></div> <!-- Línea para forzar un salto de línea -->
+                        <div class="ml-auto mt-2">
+                            <button type="submit" class="btn btn-primary button-color">Consultar</button>
+                        </div>
+                    </form>
+
+
+                    <!-- <form [formGroup]="posForm" (ngSubmit)="onSubmit()" class="d-flex">
                         <div class="form-group flex-grow-1">
                             <select id="cuentas" formControlName="cuentas" class="form-control" [ngClass]="{'is-invalid': submitted && f['cuentas'].errors}">
                                 <option value="">Selecciona una cuenta</option>
@@ -23,10 +50,10 @@
                         <div class="ml-auto">
                             <button type="submit" class="btn btn-primary button-color">Consultar</button>
                         </div>
-                    </form>
+                    </form> -->
                 </div>
             </div>
-            
+
 
             <div class="row mt-3">
                 <div class="col-md-12">
@@ -56,8 +83,8 @@
                     </div>
                 </div>
             </div>
-            
-            
+
+
 
         </div>
     </div>

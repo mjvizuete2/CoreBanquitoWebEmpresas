@@ -33,8 +33,8 @@ export class OrdenCobroComponent implements OnInit {
     this.cobroForm = this.formBuilder.group({
       order_id: ['', Validators.required],
       account_id: ['', Validators.required],
-      start_date: ['', Validators.required],
-      due_date: ['', Validators.required],
+      start_date: ['', [Validators.required, this.startDateValidator.bind(this)]],
+      due_date: ['', [Validators.required, this.dueDateValidator.bind(this)]],
       file: ['', Validators.required],
       type: ['', Validators.required],
       empresa: [''],
@@ -52,6 +52,30 @@ export class OrdenCobroComponent implements OnInit {
       this.processExcel(file);
     }
   }
+
+    // Validador personalizado para start_date (mayor o igual a la fecha actual)
+    startDateValidator(control:any) {
+      const selectedStartDate = new Date(control.value);
+      const currentDate = new Date();
+      if (selectedStartDate < currentDate) {
+        return { 'invalidStartDate': true };
+      }
+      return null;
+    }
+  
+    // Validador personalizado para due_date (mayor a start_date)
+    dueDateValidator(control:any) {
+      if (this.cobroForm) {
+        // Verifica que el control start_date exista y no sea null
+        const startDateControl = this.cobroForm.get('start_date');
+        if (startDateControl) {
+          // Accede a las propiedades del control start_date de manera segura
+          if (startDateControl.errors && (startDateControl.dirty || startDateControl.touched)) {
+            // Aquí manejas los errores o realizas otras acciones según necesites
+          }
+        }
+      }
+    }
 
   processExcel(file: File) {
     const fileReader = new FileReader();
@@ -108,6 +132,7 @@ export class OrdenCobroComponent implements OnInit {
       }
     );
   }
+  
 
   onSubmit(): void {
     this.submitted = true;

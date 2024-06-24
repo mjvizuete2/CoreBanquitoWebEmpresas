@@ -9,7 +9,6 @@ import { PosicionConsolidadaComponent } from './Pages/posicion-consolidada/posic
 import { CuentasComponent } from './Pages/cuentas/cuentas.component';
 import { OrdenCobroComponent } from './Pages/cobros/orden-cobro/orden-cobro.component';
 import { ReportesCobrosComponent } from './Pages/cobros/reportes-cobros/reportes-cobros.component';
-import { OrdenRecaudoComponent } from './Pages/recaudos/orden-recaudo/orden-recaudo.component';
 import { ReportesDiariosComponent } from './Pages/recaudos/reportes-diarios/reportes-diarios.component';
 import { ReportesTiempoRealComponent } from './Pages/recaudos/reportes-tiempo-real/reportes-tiempo-real.component';
 import { OnBoardingComponent } from './Pages/on-boarding/on-boarding.component';
@@ -23,7 +22,6 @@ const routes: Routes = [
   { path: 'cuentas', component: CuentasComponent},
   { path: 'ordenCobro', component: OrdenCobroComponent},
   { path: 'reporteCobro', component: ReportesCobrosComponent},
-  { path: 'ordenRecaudo', component: OrdenRecaudoComponent},
   { path: 'reporteRecaudo', component: ReportesDiariosComponent},
   { path: 'reporteTiempoReal', component: ReportesTiempoRealComponent},
   { path: 'onboarding', component: OnBoardingComponent},

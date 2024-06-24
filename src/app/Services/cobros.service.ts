@@ -16,7 +16,7 @@ export class CobrosService {
       Accept: 'application/json',
     }),
   };
-  private apiUrl = environment.url_back;
+  private apiUrl = environment.CoreCobros_receivables;
 
 
   constructor(private http: HttpClient) {}

@@ -1,36 +1,69 @@
 import { Component, OnInit } from '@angular/core';
 import { RecaudosService } from 'src/app/Services/recaudos.service';
 import { AuthService } from 'src/app/Services/auth.service';
+import { CobrosService } from 'src/app/Services/cobros.service';
 @Component({
   selector: 'app-reportes-diarios',
   templateUrl: './reportes-diarios.component.html',
   styleUrls: ['./reportes-diarios.component.css'],
 })
 export class ReportesDiariosComponent implements OnInit {
+  public cobros: any[] = [];
   usuario: any;
+  empresa: any;
 
-  public recaudos: any[] = [];
-
-  constructor(private recaudosService: RecaudosService,private authService:AuthService) {
+  constructor(private cobrosService: CobrosService,private authService:AuthService) {
     this.usuario=authService.getUser();
    }
 
-
-
-
-  ngOnInit(): void {
-    this.cargarReportesRecaudos();
+  getItem(key: string): any {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : null;
   }
 
-  cargarReportesRecaudos(): void {
-    this.recaudosService.reportesRecaudodsConsultar().subscribe(
+  ngOnInit(): void {
+    this.cargarReportes();
+    const savedEmpresa = localStorage.getItem('empresa');
+    if (savedEmpresa) {
+      this.empresa = JSON.parse(savedEmpresa);
+    }
+  }
+
+  pagarCobro(cobro: any): void {
+    this.cobrosService.aprobarCobro(cobro).subscribe(
+      (res)=>{
+        window.location.reload(); 
+
+      }, (error) => {
+        console.error('Error al cargar cobros:', error);
+      }
+    )
+  }
+
+  cancelarCobro(cobro: any): void {
+    console.log('Cobro a cancelar:', cobro);
+  }
+
+  idempresa:any=this.getItem("empresa");
+  
+  cargarReportes(): void {
+    this.cobrosService.reportesCobrosConsultar(this.idempresa.id).subscribe(
       (res) => {
-        if (res.status === 'success' && res.data && res.data.recaudos) {
-          this.recaudos = res.data.recaudos;
-          console.log('Respuesta reportes duarios:', this.recaudos);
-        } else {
-          console.error('Estructura de datos inesperada:', res);
-        }
+        // Mapeo de identificationType
+        this.cobros = res.map((item:any) => {
+          if (item.identificationType === 'CED') {
+            item.identificationType = 'Cédula';
+          } else if (item.identificationType === 'PAS') {
+            item.identificationType = 'Pasaporte';
+          }
+          if (item.status === 'PEN') {
+            item.status = 'Pendiente';
+          } else if (item.status === 'PAG') {
+            item.status = 'Pagado';
+          }
+          return item;
+        });
+        console.log('Respuesta reportes cobros', this.cobros);
       },
       (error) => {
         console.error('Error al cargar cobros:', error);
