@@ -11,33 +11,33 @@
         <img src="assets/logo-Banquito.png" class="img-fluid invisible-image"
             style="max-height: 100px; margin-bottom: 20px;">
         <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
+            <h4 class="text-center">{{ empresa.companyName}}</h4>
+            <br>
             <h3 class="text-center">POSICIÓN CONSOLIDADA</h3>
             <div class="row">
                 <div class="col-md-6">
 
-                    <form [formGroup]="posForm" (ngSubmit)="onSubmit()" class="d-flex flex-wrap">
+                    <form [formGroup]="cuentasForm" (ngSubmit)="onSubmit()" class="d-flex flex-wrap">
                         <div class="form-group me-2" style="flex: 1;">
-                            <label for="cuentas">Cuenta a consultar</label>
-                            <select id="cuentas" formControlName="cuentas" class="form-control"
-                                [ngClass]="{'is-invalid': submitted && f['cuenta'].errors}">
-                                <option value="">Seleccione una cuenta</option>
-                                <option *ngFor="let cuenta of cuentas" [value]="cuenta">
-                                    {{ cuenta }}
-                                </option>
-                            </select>
-                            <div *ngIf="submitted && f['cuentas'].errors"
-                                class="invalid-feedback custom-invalid-feedback">
-                                <div *ngIf="f['cuentas'].errors['required']">La cuenta es requerida</div>
-                            </div>
+                          <label for="cuenta">Cuenta a consultar</label>
+                          <select id="cuenta" formControlName="cuenta" class="form-control"
+                            [ngClass]="{'is-invalid': submitted && f['cuenta'].errors}">
+                            <option value="">Seleccione una cuenta</option>
+                            <option *ngFor="let cuenta of cuentas" [value]="cuenta.accountNumber">
+                              {{ cuenta.accountNumber }}
+                            </option>
+                          </select>
+                          <div *ngIf="submitted && f['cuenta'].errors" class="invalid-feedback custom-invalid-feedback">
+                            <div *ngIf="f['cuenta'].errors['required']">La cuenta a acreditar es requerida</div>
+                          </div>
                         </div>
                         <div class="w-100"></div> <!-- Línea para forzar un salto de línea -->
                         <div class="ml-auto mt-2">
-                            <button type="submit" class="btn btn-primary button-color">Consultar</button>
+                          <button type="submit" class="btn btn-primary button-color">Consultar</button>
                         </div>
-                    </form>
+                      </form>
 
-
-                    <!-- <form [formGroup]="posForm" (ngSubmit)="onSubmit()" class="d-flex">
+                    <!-- <form [formGroup]="cuentasForm" (ngSubmit)="onSubmit()" class="d-flex">
                         <div class="form-group flex-grow-1">
                             <select id="cuentas" formControlName="cuentas" class="form-control" [ngClass]="{'is-invalid': submitted && f['cuentas'].errors}">
                                 <option value="">Selecciona una cuenta</option>
@@ -58,27 +58,33 @@
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="card custom-card-background" style="padding: 20px;">
-                        <table class="table" *ngIf="submitted && posForm.valid">
+                        <table class="table" *ngIf="submitted && cuentasForm.valid">
                             <thead>
                                 <tr>
-                                    <th scope="col" id="title">Cuenta</th>
-                                    <th scope="col" id="title">Tipo de cuenta</th>
-                                    <th scope="col" id="title">Fecha de apertura</th>
+                                    <th scope="col" id="title">Código único de la cuenta</th>
+                                    <th scope="col" id="title">Código interno de la cuenta</th>
+                                    <th scope="col" id="title">Código internacional de la cuenta</th>
+                                    <th scope="col" id="title">Número</th>
                                     <th scope="col" id="title">Estado</th>
-                                    <th scope="col" id="title">Saldo contable</th>
-                                    <th scope="col" id="title">Saldo disponible</th>
+                                    <th scope="col" id="title">Balance actual</th>
+                                    <th scope="col" id="title">Balance disponible</th>
+                                    <th scope="col" id="title">Balance bloqueado</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let pos of posConsolidada">
-                                    <td>{{ pos.cuenta }}</td>
-                                    <td>{{ pos.tipoCuenta }}</td>
-                                    <td>{{ pos.fechaApertura }}</td>
-                                    <td>{{ pos.estado }}</td>
-                                    <td>{{ pos.saldoContable }}</td>
-                                    <td>{{ pos.saldoDisponible }}</td>
+                                <tr  >
+                                  <td>{{ movimientos.codeUniqueAccount }}</td>
+                                  <td>{{ movimientos.codeInternalAccount }}</td>
+                                  <td>{{ movimientos.codeInternationalAccount }}</td>
+                                  <td>{{ movimientos.number }}</td>
+                                  <td>{{ movimientos.state }}</td>
+                                  <td>{{ movimientos.currentBalance }}</td>
+                                  <td>{{ movimientos.availableBalance }}</td>
+                                  <td>{{ movimientos.blockedBalance }}</td>
+                                 
                                 </tr>
-                            </tbody>
+                              </tbody>
                         </table>
                     </div>
                 </div>

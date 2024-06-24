@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,6 +19,7 @@ import { ReportesCobrosComponent } from './Pages/cobros/reportes-cobros/reportes
 import { ReportesDiariosComponent } from './Pages/recaudos/reportes-diarios/reportes-diarios.component';
 import { ReportesTiempoRealComponent } from './Pages/recaudos/reportes-tiempo-real/reportes-tiempo-real.component';
 import { OnBoardingComponent } from './Pages/on-boarding/on-boarding.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { OnBoardingComponent } from './Pages/on-boarding/on-boarding.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule,
+
 
   ],
   providers: [

@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/Services/auth.service';
 import { OrdenesService } from 'src/app/Services/ordenes.service';
 import { concatMap } from 'rxjs/operators';
 import { Observable,of } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-orden-cobro',
@@ -16,14 +18,16 @@ export class OrdenCobroComponent implements OnInit {
   excelData: any;
   cobroForm!: FormGroup;
   submitted = false;
-  empresa: any;
+  empresas: any;
   idEmpresa: any;
   cuentas: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private ordenesService: OrdenesService
+    private ordenesService: OrdenesService,
+    private snackBar: MatSnackBar,
+
   ) {
     this.usuario = authService.getUser();
     this.obtenerEmpresa();
@@ -100,18 +104,18 @@ export class OrdenCobroComponent implements OnInit {
       this.ordenesService.empresaxGmail(currentUser.email).subscribe(
         response => {
 
-          this.empresa = response;
-          localStorage.setItem('empresa', JSON.stringify(this.empresa));
+          this.empresas = response;
+          localStorage.setItem('empresa', JSON.stringify(this.empresas));
 
           this.cobroForm.patchValue({
-            empresa: this.empresa,
+            empresa: this.empresas,
             orders_items: [],
             records: 0,
             total_amount: 0
           });
 
           console.log('respuesta gmail ',response);
-          this.obtenerCuentasEmpresa(this.empresa.id);
+          this.obtenerCuentasEmpresa(this.empresas.id);
         },
         error => {
           console.error('Error al obtener la empresa:', error);
@@ -194,11 +198,25 @@ export class OrdenCobroComponent implements OnInit {
       })
     ).subscribe(
       (result: any) => {
+        this.snackBar.open('Inserciones realizadas correctamente', 'Cerrar', {
+          duration: 3000,
+          panelClass: 'success-snackbar',
+          verticalPosition: 'top'
+        });
         console.log('Inserciones realizadas con éxito:', result);
+        window.location.reload(); 
+
+        
         // Aquí puedes manejar cualquier lógica adicional después de las inserciones
       },
       error => {
         console.error('Error al realizar las inserciones:', error);
+        
+        this.snackBar.open('Error al realizar inserciones', 'Cerrar', {
+          duration: 3000,
+          panelClass: 'error-snackbar',
+          verticalPosition: 'top'
+        });
       }
     );
   }

@@ -13,6 +13,24 @@ export class AuthService {
   constructor(private http: HttpClient,private empresa: OrdenesService) {}
 
 
+
+  empresaFuncion():void{
+    const currentUserStr = localStorage.getItem('currentUser');
+
+    if (currentUserStr) {
+      const currentUser = JSON.parse(currentUserStr);
+      this.empresa.empresaxGmail(currentUser.email).subscribe(
+        response => {
+          this.empresa = response;
+          localStorage.setItem('empresa', JSON.stringify(this.empresa));
+        },
+        error => {
+          console.error('Error al obtener la empresa:', error);
+        }
+      );
+  }
+}
+
   login(userName: string, password: string): Observable<boolean> {
 
 
@@ -39,7 +57,11 @@ export class AuthService {
               fullName: response.fullName,
               email: response.email,
               lastLogin: response.lastLogin
-            }));
+            })
+            
+          );
+          this.empresaFuncion();
+
             return true;
           } else {
             return false;
