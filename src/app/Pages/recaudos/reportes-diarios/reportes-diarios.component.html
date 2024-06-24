@@ -10,7 +10,6 @@
         <img src="assets/logo-Banquito.png" class="img-fluid invisible-image"
             style="max-height: 100px; margin-bottom: 20px;">        
             <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
-                <h4 class="text-center">{{ empresa.companyName}}</h4>
                 <br>
     
             <h3 class="text-center">REPORTES DIARIOS DE RECAUDOS</h3>
@@ -50,7 +49,7 @@
 
                                     <td *ngIf="usuario.rol == 'ADMIN'">
                                         <button class="btn btn-primary btn-sm mr-2"
-                                            (click)="pagarCobro(cobro.orderItemId)">Cambiar estado</button>
+                                            (click)="pagarCobro(cobro.id)">Cambiar estado</button>
                                         <!-- <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Rechazar</button> -->
                                     </td>
 

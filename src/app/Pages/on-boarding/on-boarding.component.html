@@ -5,8 +5,11 @@
     <span class="navbar-text position-absolute" *ngIf="usuario" style="right: 20px; top: 20px; font-size: 20px;">
         Bienvenido, {{ usuario.fullName}}!
     </span>
-    <div class="content">
-        <div class="col-md-12 d-flex align-items-center justify-content-center">
+    <div class="d-flex flex-column align-items-center" style="width: 100%;">
+
+        <img src="assets/logo-Banquito.png" class="img-fluid invisible-image"
+            style="max-height: 100px; margin-bottom: 20px;"> 
+                    <div class="col-md-12 d-flex align-items-center justify-content-center">
             <div class="card mt-5 custom-card-background background-color" style="width: 100%; padding:50px ">
                 <div class="card-body">
                     <h3 class="text-center">Contrato de activación de cobros y recaudos</h3>

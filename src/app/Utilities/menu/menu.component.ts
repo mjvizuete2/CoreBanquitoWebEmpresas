@@ -17,9 +17,9 @@ export class MenuComponent implements OnInit  {
   ) {this.usuario = this.authService.getUser();}
 
   ngOnInit(): void {
-    this.onBoardingService.termsAccepted$.subscribe(accepted => {
-      this.termsAccepted = accepted;
-    });
+    // this.onBoardingService.termsAccepted$.subscribe(accepted => {
+    //   this.termsAccepted = accepted;
+    // });
   }
 
   @HostListener('document:click', ['$event'])

@@ -7,8 +7,18 @@
     </button>
     <div class="collapse navbar-collapse full-height" id="navbarNav">
         <ul class="navbar-nav flex-column w-100">
+            
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" [routerLink]="['/posicionConsolidada']">Posición consolidada</a>
+            </li>
+            <li   class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown2" role="button" (click)="toggleDropdown($event)"
+                    aria-expanded="false">
+                    Opciones
+                </a>
+                <ul class="dropdown-menu custom-dropdown-menu w-100" aria-labelledby="navbarDropdown2">
+                    <li><a class="dropdown-item" [routerLink]="['/onboarding']">Activación de cobros y recaudos</a></li>
+                </ul>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" (click)="toggleDropdown($event)"
@@ -19,23 +29,15 @@
                     <li><a class="dropdown-item" [routerLink]="['/cuentas']">Movimientos</a></li>
                 </ul>
             </li>
-            <li *ngIf="!termsAccepted"  class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown2" role="button" (click)="toggleDropdown($event)"
-                    aria-expanded="false">
-                    Opciones
-                </a>
-                <ul class="dropdown-menu custom-dropdown-menu w-100" aria-labelledby="navbarDropdown2">
-                    <li><a class="dropdown-item" [routerLink]="['/onboarding']">Activación de cobros y recaudos</a></li>
-                </ul>
-            </li>
-            <li *ngIf="termsAccepted && usuario.rol != 'ADMIN'" class="nav-item dropdown">
+            
+            <li *ngIf=" usuario.rol != 'ADMIN'" class="nav-item dropdown">
                 <a class="nav-link dropdown" id="navbarDropdown3" role="button"
                    aria-expanded="false" [routerLink]="['/ordenCobro']">
                   Ingreso de Ordenes
                 </a>
               </li>
               
-            <li *ngIf="termsAccepted" class="nav-item dropdown">
+            <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown4" role="button" (click)="toggleDropdown($event)"
                     aria-expanded="false">
                     Reportes
@@ -45,9 +47,7 @@
                     <hr class="dropdown-divider">
                     <li><a class="dropdown-item" [routerLink]="['/reporteRecaudo']">Reportes diarios Recaudos</a></li>
                     <li>
-                        <hr class="dropdown-divider">
                     </li>
-                    <li><a class="dropdown-item" [routerLink]="['/reporteTiempoReal']">Reportes de tiempo real</a></li>
                     <li>
                   </li>
                   </ul>

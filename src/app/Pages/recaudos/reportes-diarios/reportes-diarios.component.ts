@@ -22,7 +22,7 @@ export class ReportesDiariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarReportes();
+    this.cargarReportes2();
     const savedEmpresa = localStorage.getItem('empresa');
     if (savedEmpresa) {
       this.empresa = JSON.parse(savedEmpresa);
@@ -30,6 +30,7 @@ export class ReportesDiariosComponent implements OnInit {
   }
 
   pagarCobro(cobro: any): void {
+    console.log('cobro ',cobro)
     this.cobrosService.aprobarCobro(cobro).subscribe(
       (res)=>{
         window.location.reload(); 
@@ -64,6 +65,31 @@ export class ReportesDiariosComponent implements OnInit {
           return item;
         });
         console.log('Respuesta reportes cobros', this.cobros);
+      },
+      (error) => {
+        console.error('Error al cargar cobros:', error);
+      }
+    );
+  }
+
+
+  cargarReportes2(): void {
+    this.cobrosService.consultaPorServicio('REC').subscribe(
+      (data) => {
+        this.cobros = data;
+        this.cobros.forEach((cobro: any) => {
+          if (cobro.identificationType === 'CED') {
+            cobro.identificationType = 'Cédula';
+          } else if (cobro.identificationType === 'PAS') {
+            cobro.identificationType = 'Pasaporte';
+          }
+          if(cobro.status== 'PAG'){
+            cobro.status='Pagado'
+          }else{
+             cobro.status='Pendiente'
+          }
+        });
+        console.log('Cobros cargados:', this.cobros);
       },
       (error) => {
         console.error('Error al cargar cobros:', error);

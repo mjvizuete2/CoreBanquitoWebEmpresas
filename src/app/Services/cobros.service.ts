@@ -31,4 +31,9 @@ export class CobrosService {
   public aprobarCobro(id:any){
     return this.http.put<any>(`${this.apiUrl}/order-items/${id}/status?status=PAG`, this.header);
   }
+
+  public consultaPorServicio(servicioo:any) {
+    return this.http.get<any>( `${this.apiUrl}/order-items/search/by-type?type=${servicioo}`, this.header);
+  
+  }
 }
