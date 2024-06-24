@@ -21,8 +21,14 @@ export class OrdenesService {
     this.idOrder = this.generarIdUnico();
    }
 
-  public empresaxGmail(client: string) {
+   public empresaxGmail(client: string) {
     return this.http.get<any>(`${this.apiUrl}/company/email/${client}`, this.header);
+  }
+
+  public fetchAndStoreEmpresa(client: string) {
+    this.empresaxGmail(client).subscribe(response => {
+      localStorage.setItem('empresa', JSON.stringify(response));
+    });
   }
 
   public cuentasxempresa(idEmpresa: string) {
@@ -30,8 +36,8 @@ export class OrdenesService {
   }
 
   public generarIdUnico(): string {
-    const randomPart = Math.floor(10000 + Math.random() * 90000).toString();
-    const timestamp = Date.now().toString();
+    const randomPart = Math.floor(100 + Math.random() * 900).toString();
+    const timestamp = Date.now().toString().slice(0,5);
     const uniqueId = `${randomPart}${timestamp}`;
     return uniqueId;
   }
@@ -44,42 +50,43 @@ export class OrdenesService {
       startDate: startDate,
       dueDate: dueDate,
       totalAmount: totalAmount,
-      rocords: records,
+      records: records,
       description: "orden ingresada",
-      status: "1"
+      status: "PEN"
     };
 
-    return this.http.post<any>(`${this.apiUrl}/ordenes`, body);
+    return this.http.post<any>(`${this.apiUrl}/orders`, body);
   }
 
-  public insertarItemOrden( debtorName: string, identificationType: string, identification: string, debitAccount: string,owedAccount: string,counterpart:string,status:string): Observable<any> {
+  public insertarItemOrden( debtorName: string, identificationType: string, identification: string, debitAccount: string,owedAmount: string,counterpart:string,status:string): Observable<any> {
     const body = {
       orderId: this.idOrder,
       debtorName: debtorName,
       identificationType: identificationType,
       identification: identification,
       debitAccount: debitAccount,
-      owedAccount: owedAccount,
+      owedAmount: owedAmount,
       counterpart:counterpart,
-      status: "1"
+      status: "PEN",
+      orderItemId: this.generarIdUnico()
     };
 
-    return this.http.post<any>(`${this.apiUrl}/ordenes`, body);
+    return this.http.post<any>(`${this.apiUrl}/order-items`, body);
   }
 
 
 
-  insertarOrdenCobro(companyId: string, accountId: string, type: string, name: string, date: string): Observable<any> {
+  insertarOrdenCobro(companyId: string, accountId: string, type: string, name: string, date: any): Observable<any> {
     const body = {
       id: this.idReceivable,
       companyId: companyId,
       accountId: accountId,
-      typy: type,
+      type: type,
       name: name,
       date: date
     };
 
-    return this.http.post<any>(`${this.apiUrl}/ordenesCobro`, body);
+    return this.http.post<any>(`${this.apiUrl}/receivables`, body);
   }
 
 

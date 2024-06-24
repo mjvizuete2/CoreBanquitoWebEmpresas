@@ -4,9 +4,19 @@
 
 export const environment = {
   production: false,
-  url_back: 'https://9sn1ct91-8080.use.devtunnels.ms',
-  url_backlogin: 'https://9sn1ct91-8082.use.devtunnels.ms',
-  url_backtransacciones: 'https://9sn1ct91-8083.use.devtunnels.ms',
+  CoreBanquito_account: 'http://corebanquito-account.us-east-1.elasticbeanstalk.com',
+  CoreBanquito_bank : 'http://corebanquito-bank.us-east-1.elasticbeanstalk.com',
+  CoreBanquito_client : 'http://corebanquito-client.us-east-1.elasticbeanstalk.com',
+  CoreBanquito_interest : 'http://corebanquito-interest.us-east-2.elasticbeanstalk.com',
+  CoreBanquito_product : 'http://corebanquito-product.us-east-2.elasticbeanstalk.com',
+  CoreCobros_commission : 'http://corecobros-commission.us-east-2.elasticbeanstalk.com',
+  CoreCobros_invoice : 'http://corecobros-invoice.us-east-1.elasticbeanstalk.com',
+  CoreCobros_receivables : 'http://corecobros-receivables.us-east-1.elasticbeanstalk.com',
+
+  url_back: 'http://localhost:8080',
+  url_backlogin: 'http://localhost:8082',
+
+  url_backtransacciones: 'http://localhost:8083',
 
   x_token: 'S05EU0dKS0FTSklFVFVOVlNERklBSU8kJS8jU0pUSUVSVFU5ODRVV0VSVzBST0ZKS1NETlZLRTlXMjNVVDlXRVVTRE9KRlNXMFJJK3s',
 };

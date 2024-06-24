@@ -9,6 +9,7 @@ import { CobrosService } from 'src/app/Services/cobros.service';
 export class ReportesCobrosComponent implements OnInit {
   public cobros: any[] = [];
   usuario: any;
+  empresa: any;
 
   constructor(private cobrosService: CobrosService,private authService:AuthService) {
     this.usuario=authService.getUser();
@@ -21,29 +22,52 @@ export class ReportesCobrosComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarReportes();
+    const savedEmpresa = localStorage.getItem('empresa');
+    if (savedEmpresa) {
+      this.empresa = JSON.parse(savedEmpresa);
+    }
   }
 
   pagarCobro(cobro: any): void {
-    console.log('Cobro a pagar:', cobro);
+    this.cobrosService.aprobarCobro(cobro).subscribe(
+      (res)=>{
+        window.location.reload(); 
+
+      }, (error) => {
+        console.error('Error al cargar cobros:', error);
+      }
+    )
   }
 
   cancelarCobro(cobro: any): void {
     console.log('Cobro a cancelar:', cobro);
   }
 
+  idempresa:any=this.getItem("empresa");
+  
   cargarReportes(): void {
-    this.cobrosService.reportesCobrosConsultar().subscribe(
+    this.cobrosService.reportesCobrosConsultar(this.idempresa.id).subscribe(
       (res) => {
-        if (res.status === 'success' && res.data && res.data.cobros) {
-          this.cobros = res.data.cobros;
-          console.log('Respuesta reportes cobros', this.cobros);
-        } else {
-          console.error('Estructura de datos inesperada:', res);
-        }
+        // Mapeo de identificationType
+        this.cobros = res.map((item:any) => {
+          if (item.identificationType === 'CED') {
+            item.identificationType = 'Cédula';
+          } else if (item.identificationType === 'PAS') {
+            item.identificationType = 'Pasaporte';
+          }
+          if (item.status === 'PEN') {
+            item.status = 'Pendiente';
+          } else if (item.status === 'PAG') {
+            item.status = 'Pagado';
+          }
+          return item;
+        });
+        console.log('Respuesta reportes cobros', this.cobros);
       },
       (error) => {
         console.error('Error al cargar cobros:', error);
       }
     );
   }
+  
 }

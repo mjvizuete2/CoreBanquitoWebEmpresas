@@ -3,7 +3,7 @@
         <app-menu></app-menu>
     </div>
     <span class="navbar-text position-absolute" *ngIf="usuario" style="right: 20px; top: 20px; font-size: 20px;">
-        Bienvenido, {{ usuario.usuario }}!
+        Bienvenido, {{ usuario.fullName}}!
       </span>
     <div class="content">
         <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
@@ -39,17 +39,17 @@
                         <thead>
                           <tr>
                             <th scope="col">Account ID</th>
-                            <th scope="col">Ammount</th>
-                            <th scope="col">Apply Tax</th>
-                            <th scope="col">Code Channel</th>
-                            <th scope="col">Creation Date</th>
-                            <th scope="col">Creditor Account</th>
-                            <th scope="col">Debitor Account</th>
-                            <th scope="col">Reference</th>
-                            <th scope="col">State</th>
-                            <th scope="col">Transaction Subtype</th>
-                            <th scope="col">Transaction Type</th>
-                            <th scope="col">Unique Key</th>
+                            <th scope="col">Monto</th>
+                            <th scope="col">Impuesto aplicado</th>
+                            <th scope="col">Canal</th>
+                            <th scope="col">Fecha de creación</th>
+                            <th scope="col">Cuenta de Acreedor</th>
+                            <th scope="col">Cuenta Debitada</th>
+                            <th scope="col">Referencia</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col">Subtipo de Transacción</th>
+                            <th scope="col">Tipo de Transaction </th>
+                            <th scope="col">Clave Única</th>
                           </tr>
                         </thead>
                         <tbody>

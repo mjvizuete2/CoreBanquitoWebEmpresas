@@ -41,12 +41,14 @@ export class LoginComponent implements OnInit {
 
 
   onSubmit() {
-    this.authService.login(this.username, this.password).subscribe(success => {
-      if (success) {
-        this.router.navigate(['posicionConsolidada']);
-      } else {
+    this.authService.login(this.username, this.password).subscribe(
+      (response) => {
+        this.router.navigate(['/posicionConsolidada']);
+      },
+      (error) => {
         this.errorMessage = 'Contraseña o Usuario Incorrectos';
+        console.log(this.errorMessage);
       }
-    });
+    );
   }
 }

@@ -75,14 +75,18 @@ export class OrdenCobroComponent implements OnInit {
       const currentUser = JSON.parse(currentUserStr);
       this.ordenesService.empresaxGmail(currentUser.email).subscribe(
         response => {
+
           this.empresa = response;
+          localStorage.setItem('empresa', JSON.stringify(this.empresa));
+
           this.cobroForm.patchValue({
-            empresa: this.empresa[0],
+            empresa: this.empresa,
             orders_items: [],
             records: 0,
             total_amount: 0
           });
 
+          console.log('respuesta gmail ',response);
           this.obtenerCuentasEmpresa(this.empresa.id);
         },
         error => {
@@ -117,7 +121,7 @@ export class OrdenCobroComponent implements OnInit {
       identificationType: row.identificationType,
       identification: row.identification,
       debitAccount: row.debitAccount,
-      owedAccount: row.owedAccount,
+      owedAmount: row.owedAmount,
       counterpart: row.counterpart,
       status: '1'
     }));
@@ -138,13 +142,16 @@ export class OrdenCobroComponent implements OnInit {
     });
 
     console.log(this.cobroForm.value);
+    const fechaISO = new Date(this.cobroForm.value.start_date);
+
+    
 
     this.ordenesService.insertarOrdenCobro(
       this.cobroForm.value.empresa.id,
       this.cobroForm.value.account_id,
       this.cobroForm.value.type,
-      this.cobroForm.value.order_id,  // Ajusta este campo según sea necesario
-      this.cobroForm.value.start_date
+      this.cobroForm.value.order_id, 
+      fechaISO
     ).pipe(
       concatMap(() => {
         return this.ordenesService.insertarOrden(
@@ -178,9 +185,9 @@ export class OrdenCobroComponent implements OnInit {
         itemOrder.identificationType,
         itemOrder.identification,
         itemOrder.debitAccount,
-        itemOrder.owedAccount,
+        itemOrder.owedAmount,
         itemOrder.counterpart,
-        '1'
+        'PEN'
       );
     });
 

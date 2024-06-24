@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CuentasService } from 'src/app/Services/cuentas.service';
 import { PosConsolidadaService } from 'src/app/Services/posConsolidada.service';
 import { AuthService } from 'src/app/Services/auth.service';
+
 @Component({
   selector: 'app-posicion-consolidada',
   templateUrl: './posicion-consolidada.component.html',

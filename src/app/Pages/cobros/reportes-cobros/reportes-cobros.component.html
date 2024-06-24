@@ -3,7 +3,7 @@
         <app-menu></app-menu>
     </div>
     <span class="navbar-text position-absolute" *ngIf="usuario" style="right: 20px; top: 20px; font-size: 20px;">
-        Bienvenido, {{ usuario.usuario }}!
+        Bienvenido, {{ usuario.fullName}}!
       </span>
     <div class="content">
         <div class="card mt-5 custom-card-background" style="padding: 50px; margin:20px">
@@ -18,39 +18,32 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col" id="title">Referencia</th>
-                                    <th scope="col" id="title">Nombre del cliente</th>
+                                    <th scope="col" id="title">Nombre del deudor</th>
                                     <th scope="col" id="title">Tipo de identificación</th>
                                     <th scope="col" id="title">Identificación</th>
                                     <th scope="col" id="title">Cuenta del cliente</th>
                                     <th scope="col" id="title">Monto</th>
-                                    <th scope="col" id="title">Fecha de inicio</th>
                                     <th scope="col" id="title">Fecha de vencimiento</th>
-                                    <th scope="col" id="title">Cuenta a acreditar</th>
-                                    <th scope="col" id="title">Tipo</th>
-                                    <th scope="col" id="title">Frecuencia</th>
-                                    <th scope="col" id="title">Cancelado</th>
+                                    <th scope="col" id="title">Estado</th>
+
                                     <th *ngIf="usuario.rol == 'ADMIN'" scope="col" id="title">Acciones</th>
 
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let cobro of cobros">
-                                  <td>{{ cobro.referencia }}</td>
-                                  <td>{{ cobro.nombreCliente }}</td>
-                                  <td>{{ cobro.tipoId }}</td>
-                                  <td>{{ cobro.identificacion }}</td>
-                                  <td>{{ cobro.cuentaCliente }}</td>
-                                  <td>{{ cobro.monto }}</td>
-                                  <td>{{ cobro.fechaInicio }}</td>
-                                  <td>{{ cobro.fechaVencimiento }}</td>
-                                  <td>{{ cobro.cuentaAcreditar }}</td>
-                                  <td>{{ cobro.tipo }}</td>
-                                  <td>{{ cobro.frecuencia }}</td>
-                                  <td>{{ cobro.cancelado }}</td>
+                                  <td>{{ cobro.debtorName }}</td>
+                                  <td>{{ cobro.identificationType }}</td>
+                                  <td>{{ cobro.identification }}</td>
+                                  <td>{{ cobro.debitAccount }}</td>
+                                  <td>{{ cobro.owedAmount }}</td>
+                                  <td>{{ cobro.dueDate }}</td>
+                                  <td>{{ cobro.status }}</td>
+                                  
+                                  
                                   <td *ngIf="usuario.rol == 'ADMIN'">
-                                    <button class="btn btn-primary btn-sm mr-2" (click)="pagarCobro(cobro)">Autorizar</button>
-                                    <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Rechazar</button>
+                                    <button class="btn btn-primary btn-sm mr-2" (click)="pagarCobro(cobro.orderItemId)">Cambiar estado</button>
+                                    <!-- <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Rechazar</button> -->
                                   </td>
 
                                 </tr>

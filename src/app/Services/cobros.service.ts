@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 //import { environment } from '../../../environments/environment';
 
@@ -15,11 +16,19 @@ export class CobrosService {
       Accept: 'application/json',
     }),
   };
+  private apiUrl = environment.url_back;
+
 
   constructor(private http: HttpClient) {}
 
-  public reportesCobrosConsultar() {
-    //return this.http.get<any>(this.url + '/api/agencias?find=vigente&value=1', this.header);
-    return this.http.get<any>('./assets/pruebasJs/cobros.json', this.header);
+
+
+
+  public reportesCobrosConsultar(id:any){
+    return this.http.get<any>(`${this.apiUrl}/order-items/search?companyId=${id}`, this.header);
+  }
+
+  public aprobarCobro(id:any){
+    return this.http.put<any>(`${this.apiUrl}/order-items/${id}/status?status=PAG`, this.header);
   }
 }

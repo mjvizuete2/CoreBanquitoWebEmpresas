@@ -27,13 +27,14 @@ export class CuentasComponent implements OnInit {
     private cdr: ChangeDetectorRef
   ) {
     this.usuario = authService.getUser();
-    this.obtenerEmpresa();
   }
 
   ngOnInit(): void {
     this.cuentasForm = this.formBuilder.group({
       cuenta: ['', Validators.required]
     });
+    this.obtenerEmpresa();
+
   }
 
   get f() {
