@@ -14,26 +14,26 @@ export class AuthService {
 
   constructor(
     private http: HttpClient, 
-    private empresa: OrdenesService,
-    private cliente:ClientService
+    private empresaService: OrdenesService,
+    private clienteService:ClientService
   ) {}
 
-  empresaFuncion(): void {
-    const currentUserStr = localStorage.getItem('currentUser');
+  // empresaFuncion(): void {
+  //   const currentUserStr = localStorage.getItem('currentUser');
 
-    if (currentUserStr) {
-      const currentUser = JSON.parse(currentUserStr);
-      this.empresa.empresaxGmail(currentUser.email).subscribe(
-        (response) => {
-          this.empresa = response;
-          localStorage.setItem('empresa1', JSON.stringify(this.empresa));
-        },
-        (error) => {
-          console.error('Error al obtener la empresa:', error);
-        }
-      );
-    }
-  }
+  //   if (currentUserStr) {
+  //     const currentUser = JSON.parse(currentUserStr);
+  //     this.empresa.empresaxGmail(currentUser.email).subscribe(
+  //       (response) => {
+  //         this.empresa = response;
+  //         localStorage.setItem('empresa1', JSON.stringify(this.empresa));
+  //       },
+  //       (error) => {
+  //         console.error('Error al obtener la empresa:', error);
+  //       }
+  //     );
+  //   }
+  // }
 
 
 
@@ -42,10 +42,10 @@ export class AuthService {
 
     if (currentUserStr) {
       const currentUser = JSON.parse(currentUserStr);
-      this.cliente.clientexGmail(currentUser.email).subscribe(
+      this.clienteService.clientexGmail(currentUser.email).subscribe(
         (response) => {
-          this.cliente = response;
-          localStorage.setItem('cliente', JSON.stringify(this.cliente));
+          const clienteResponse = response; // Almacena la respuesta en una variable local
+          localStorage.setItem('cliente', JSON.stringify(clienteResponse));
         },
         (error) => {
           console.error('Error al obtener el cliente:', error);
@@ -59,11 +59,11 @@ export class AuthService {
 
     if (cliente) {
       const currentUser = JSON.parse(cliente);
-      const companiaMayus= currentUser.companyName.toUpperCase();
-      this.empresa.empresaxName(companiaMayus).subscribe(
+      const companiaMayus = currentUser.companyName.toUpperCase();
+      this.empresaService.empresaxName(companiaMayus).subscribe(
         (response) => {
-          this.empresa = response;
-          localStorage.setItem('empresa', JSON.stringify(this.empresa));
+          const empresaResponse = response; // Almacena la respuesta en una variable local
+          localStorage.setItem('empresa', JSON.stringify(empresaResponse));
         },
         (error) => {
           console.error('Error al obtener la empresa:', error);
@@ -72,23 +72,9 @@ export class AuthService {
     }
   }
 
-
   login(userName: string, password: string): Observable<boolean> {
     return this.http
-      .put<{
-        id: number;
-        codeRole: string;
-        nameRole: string;
-        userName: string;
-        firstName: string;
-        lastName: string;
-        password: string;
-        state: string;
-        typeUser: string;
-        lastLogin: string;
-        email: string;
-        fullName: string;
-      }>(this.apiUrl + '/login', { userName, password })
+      .put<any>(`${this.apiUrl}/login`, { userName, password })
       .pipe(
         map((response) => {
           if (response.userName === userName) {
@@ -102,10 +88,8 @@ export class AuthService {
                 lastLogin: response.lastLogin,
               })
             );
-            // this.empresaFuncion();
-            this.clienteFuncion();
             this.empresaFuncion2();
-
+            this.clienteFuncion();
             return true;
           } else {
             return false;
@@ -117,6 +101,9 @@ export class AuthService {
   logout(): void {
     // Eliminar la información del usuario de localStorage o sessionStorage
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('cliente');
+    localStorage.removeItem('empresa');
+
   }
 
   getUser(): any {

@@ -37,13 +37,10 @@ export class OrdenCobroComponent implements OnInit {
 
   ngOnInit(): void {
     this.cobroForm = this.formBuilder.group({
-      order_id: ['', Validators.required],
+      order_id: [''],
       account_id: ['', Validators.required],
-      start_date: [
-        '',
-        [Validators.required, this.startDateValidator.bind(this)],
-      ],
-      due_date: ['', [Validators.required, this.dueDateValidator.bind(this)]],
+      start_date: [''],
+      due_date: [''],
       file: ['', Validators.required],
       type: ['', Validators.required],
       company_id: [''],
@@ -86,7 +83,7 @@ export class OrdenCobroComponent implements OnInit {
   startDateValidator(control: any) {
     const selectedStartDate = new Date(control.value);
     const currentDate = new Date();
-    if (selectedStartDate < currentDate) {
+    if (selectedStartDate <= currentDate) {
       return { invalidStartDate: true };
     }
     return null;
@@ -241,7 +238,7 @@ export class OrdenCobroComponent implements OnInit {
             verticalPosition: 'top',
           });
           console.log('Inserciones realizadas con éxito:', result);
-          window.location.reload();
+          // window.location.reload();
 
           // Aquí puedes manejar cualquier lógica adicional después de las inserciones
         },

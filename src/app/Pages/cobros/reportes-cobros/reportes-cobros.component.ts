@@ -120,7 +120,7 @@ export class ReportesCobrosComponent implements OnInit {
 
     this.cobrosService.aprobarCobro(cobro.id).subscribe(
       (res)=>{
-        window.location.reload(); 
+        // window.location.reload(); 
 
       }, (error) => {
         console.error('Error al cargar cobros:', error);
