@@ -31,6 +31,30 @@ export class OrdenesService {
     );
   }
 
+  public cobroId(id:any) {
+    return this.http.get<any>(
+      `${this.apiUrl}/orders/${id}`,
+      this.header
+    );
+  }
+
+  public recivablesId(id:any) {
+    return this.http.get<any>(
+      `${this.apiUrl}/receivables/${id}`,
+      this.header
+    );
+  }
+
+  public accountsId(id:any) {
+    return this.http.get<any>(
+      `${this.apiUrl}/accounts/${id}`,
+      this.header
+    );
+  }
+
+  
+
+
   public empresaxName(name: any) {
     return this.http.get<any>(
       `${this.apiUrl}/company/search?namePattern=${name}`,
