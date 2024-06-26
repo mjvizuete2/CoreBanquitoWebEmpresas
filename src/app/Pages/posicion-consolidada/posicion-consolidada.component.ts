@@ -39,7 +39,7 @@ export class PosicionConsolidadaComponent implements OnInit {
     this.cuentasForm = this.formBuilder.group({
       cuenta: ['', Validators.required]
     });
-    this.obtenerEmpresa();
+    // this.obtenerEmpresa();
   }
 
   

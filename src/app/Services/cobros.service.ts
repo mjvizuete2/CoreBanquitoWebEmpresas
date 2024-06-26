@@ -36,4 +36,8 @@ export class CobrosService {
     return this.http.get<any>( `${this.apiUrl}/order-items/search/by-type?type=${servicioo}`, this.header);
   
   }
+
+  public lastReceivable(){
+    return this.http.get<any>(`${this.apiUrl}/receivables/last`, this.header);
+  }
 }

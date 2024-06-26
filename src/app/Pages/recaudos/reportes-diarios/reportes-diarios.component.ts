@@ -60,7 +60,7 @@ export class ReportesDiariosComponent implements OnInit {
           if (item.status === 'PEN') {
             item.status = 'Pendiente';
           } else if (item.status === 'PAG') {
-            item.status = 'Pagado';
+            item.status = 'Aprobado';
           }
           return item;
         });
@@ -84,7 +84,7 @@ export class ReportesDiariosComponent implements OnInit {
             cobro.identificationType = 'Pasaporte';
           }
           if(cobro.status== 'PAG'){
-            cobro.status='Pagado'
+            cobro.status='Aprobado'
           }else{
              cobro.status='Pendiente'
           }

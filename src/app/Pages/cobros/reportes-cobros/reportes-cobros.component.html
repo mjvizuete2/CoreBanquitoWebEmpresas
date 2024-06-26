@@ -43,7 +43,7 @@
 
                                     <td *ngIf="usuario.rol == 'ADMIN'">
                                         <button class="btn btn-primary btn-sm mr-2"
-                                            (click)="pagarCobro(cobro.id)">Cambiar estado</button>
+                                            (click)="pagarCobro(cobro.id, cobro.debitAccount, cobro.owedAmount)">Aprobar</button>
                                         <!-- <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Rechazar</button> -->
                                     </td>
 

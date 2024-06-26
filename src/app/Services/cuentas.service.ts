@@ -33,4 +33,24 @@ export class CuentasService {
     return this.http.get<any>(`${this.apiUrlTransacciones}/accounts/by-unique-code/${countNumber}`, this.header);
   }
 
+  public transaccion(accountId:any, reference:any, ammount:any, creditorAccount:any, debitorAccount:any, creationDate:any ){
+    const body = {
+      accountId: accountId,
+      "codeChannel": "0004",
+      "uniqueKey": "clave_unica_001",
+      "transactionType": "DEB",
+      "transactionSubtype": "ADJUSTMENT",
+      reference: reference,
+      ammount: ammount,
+      creditorAccount: creditorAccount,
+      debitorAccount: debitorAccount,
+      creationDate: creationDate,
+      "applyTax": false,
+      "parentTransactionKey": "",
+      "state": "POS"
+    };
+  
+    return this.http.post<any>(`${this.apiUrlTransacciones}/account-transactions`, body);
+  }
+
 }

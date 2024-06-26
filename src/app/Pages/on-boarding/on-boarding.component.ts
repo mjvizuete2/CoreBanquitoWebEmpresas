@@ -28,21 +28,21 @@ export class OnBoardingComponent implements OnInit {
 
      obtenerContract(): void {
       const currentUserStr = localStorage.getItem('currentUser');
-      if (currentUserStr) {
-        const currentUser = JSON.parse(currentUserStr);
-        this.ordenesService.empresaxGmail(currentUser.email).subscribe(
-          response => {
-            this.contract = response.contractAcceptance
-            ;
+      // if (currentUserStr) {
+      //   const currentUser = JSON.parse(currentUserStr);
+      //   this.ordenesService.empresaxGmail(currentUser.email).subscribe(
+      //     response => {
+      //       this.contract = response.contractAcceptance
+      //       ;
            
-          },
-          error => {
-            console.error('Error al obtener la contract:', error);
-          }
-        );
-      } else {
-        console.error('No se encontró currentUser en localStorage.');
-      }
+      //     },
+      //     error => {
+      //       console.error('Error al obtener la contract:', error);
+      //     }
+      //   );
+      // } else {
+      //   console.error('No se encontró currentUser en localStorage.');
+      // }
     }
 
   ngOnInit(): void {
