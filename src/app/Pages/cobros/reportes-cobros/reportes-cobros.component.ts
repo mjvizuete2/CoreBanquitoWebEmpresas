@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { CobrosService } from 'src/app/Services/cobros.service';
 import { CuentasService } from 'src/app/Services/cuentas.service';
 import { OrdenesService } from 'src/app/Services/ordenes.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-reportes-cobros',
@@ -20,7 +22,9 @@ export class ReportesCobrosComponent implements OnInit {
     private cobrosService: CobrosService,
     private authService:AuthService,
     private cuentasService:CuentasService,
-    private ordenesService:OrdenesService
+    private ordenesService:OrdenesService,
+    private snackBar: MatSnackBar,
+
   ) {
     this.usuario=authService.getUser();
    }
@@ -121,6 +125,11 @@ export class ReportesCobrosComponent implements OnInit {
     this.cobrosService.aprobarCobro(cobro.id).subscribe(
       (res)=>{
         // window.location.reload(); 
+        this.snackBar.open('Item de orden pagado', 'Cerrar', {
+          duration: 3000,
+          panelClass: 'success-snackbar',
+          verticalPosition: 'top',
+        });
 
       }, (error) => {
         console.error('Error al cargar cobros:', error);
@@ -140,7 +149,6 @@ export class ReportesCobrosComponent implements OnInit {
       (res) => {
         // Mapeo de identificationType
         this.cobros = res.map((item:any) => {
-          console.log('item ',item)
           if (item.identificationType === 'CED') {
             item.identificationType = 'Cédula';
           } else if (item.identificationType === 'PAS') {
@@ -152,8 +160,43 @@ export class ReportesCobrosComponent implements OnInit {
             item.status = 'Pagado';
           }
           return item;
+
         });
         console.log('Respuesta reportes cobros', this.cobros);
+
+        this.ordenesService.itemOrderId(res.id).subscribe(
+          res => {
+              //Aumento en la cuenta de la empresa
+              this.ordenesService.cobroId(res.id ).subscribe(
+                res => {
+                  this.ordenesService.recivablesId(res.id).subscribe(
+                    res => {
+                        //Aumento en la cuenta de la empresa
+                        this.ordenesService.empresaId(res.id ).subscribe(
+                          resempresas => {
+                            console.log('empresas:', resempresas);
+                    
+                          },
+                          error => {
+                            console.error('Error al realizar la transaccion:', error);
+                          }
+                        );
+                    },
+                    error => {
+                      console.error('Error al obtener los movimientos de la cuenta:', error);
+                    }
+                  );
+          
+                },
+                error => {
+                  console.error('Error al realizar la transaccion:', error);
+                }
+              );
+          },
+          error => {
+            console.error('Error al obtener los movimientos de la cuenta:', error);
+          }
+        );
       },
       (error) => {
         console.error('Error al cargar cobros:', error);
@@ -166,7 +209,6 @@ export class ReportesCobrosComponent implements OnInit {
       (data) => {
         this.cobros = data;
         this.cobros.forEach((cobro: any) => {
-          console.log(cobro);
           if (cobro.identificationType === 'CED') {
             cobro.identificationType = 'Cédula';
           } else if (cobro.identificationType === 'PAS') {
@@ -178,7 +220,9 @@ export class ReportesCobrosComponent implements OnInit {
              cobro.status='Pendiente'
           }
         });
-        console.log('Cobros cargados:', this.cobros);
+        console.log('Cobros cargados:');
+
+
       },
       (error) => {
         console.error('Error al cargar cobros:', error);

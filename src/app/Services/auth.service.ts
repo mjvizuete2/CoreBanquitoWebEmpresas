@@ -13,9 +13,9 @@ export class AuthService {
   private apiUrl = environment.CoreBanquito_bank; // Usa la ruta relativa definida en el proxy
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private empresaService: OrdenesService,
-    private clienteService:ClientService
+    private clienteService: ClientService
   ) {}
 
   // empresaFuncion(): void {
@@ -35,8 +35,6 @@ export class AuthService {
   //   }
   // }
 
-
-
   clienteFuncion(): void {
     const currentUserStr = localStorage.getItem('currentUser');
 
@@ -46,6 +44,17 @@ export class AuthService {
         (response) => {
           const clienteResponse = response; // Almacena la respuesta en una variable local
           localStorage.setItem('cliente', JSON.stringify(clienteResponse));
+
+          const companiaMayus = clienteResponse.companyName.toUpperCase();
+          this.empresaService.empresaxName(companiaMayus).subscribe(
+            (response) => {
+              const empresaResponse = response; // Almacena la respuesta en una variable local
+              localStorage.setItem('empresa', JSON.stringify(empresaResponse));
+            },
+            (error) => {
+              console.error('Error al obtener la empresa:', error);
+            }
+          );
         },
         (error) => {
           console.error('Error al obtener el cliente:', error);
@@ -54,23 +63,23 @@ export class AuthService {
     }
   }
 
-  empresaFuncion2(): void {
-    const cliente = localStorage.getItem('cliente');
+  // empresaFuncion2(): void {
+  //   const cliente = localStorage.getItem('cliente');
 
-    if (cliente) {
-      const currentUser = JSON.parse(cliente);
-      const companiaMayus = currentUser.companyName.toUpperCase();
-      this.empresaService.empresaxName(companiaMayus).subscribe(
-        (response) => {
-          const empresaResponse = response; // Almacena la respuesta en una variable local
-          localStorage.setItem('empresa', JSON.stringify(empresaResponse));
-        },
-        (error) => {
-          console.error('Error al obtener la empresa:', error);
-        }
-      );
-    }
-  }
+  //   if (cliente) {
+  //     const currentUser = JSON.parse(cliente);
+  //     const companiaMayus = currentUser.companyName.toUpperCase();
+  //     this.empresaService.empresaxName(companiaMayus).subscribe(
+  //       (response) => {
+  //         const empresaResponse = response; // Almacena la respuesta en una variable local
+  //         localStorage.setItem('empresa', JSON.stringify(empresaResponse));
+  //       },
+  //       (error) => {
+  //         console.error('Error al obtener la empresa:', error);
+  //       }
+  //     );
+  //   }
+  // }
 
   login(userName: string, password: string): Observable<boolean> {
     return this.http
@@ -88,7 +97,7 @@ export class AuthService {
                 lastLogin: response.lastLogin,
               })
             );
-            this.empresaFuncion2();
+            // this.empresaFuncion2();
             this.clienteFuncion();
             return true;
           } else {
@@ -103,7 +112,6 @@ export class AuthService {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('cliente');
     localStorage.removeItem('empresa');
-
   }
 
   getUser(): any {

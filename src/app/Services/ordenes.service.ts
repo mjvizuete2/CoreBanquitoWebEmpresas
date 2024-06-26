@@ -45,6 +45,19 @@ export class OrdenesService {
     );
   }
 
+  public itemOrderId(id:any) {
+    return this.http.get<any>(
+      `${this.apiUrl}/order-items/${id}`,
+      this.header
+    );
+  }
+
+  public empresaId(id:any) {
+    return this.http.get<any>(
+      `${this.apiUrl}/company/${id}`,
+      this.header
+    );
+  }
   public accountsId(id:any) {
     return this.http.get<any>(
       `${this.apiUrl}/accounts/${id}`,

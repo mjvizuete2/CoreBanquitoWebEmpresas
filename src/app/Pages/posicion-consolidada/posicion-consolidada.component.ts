@@ -37,6 +37,7 @@ export class PosicionConsolidadaComponent implements OnInit {
 
 
   ngOnInit(): void {
+
     this.cuentasForm = this.formBuilder.group({
       cuenta: ['', Validators.required]
     });
