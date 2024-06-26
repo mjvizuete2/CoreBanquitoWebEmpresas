@@ -20,6 +20,7 @@ export class PosicionConsolidadaComponent implements OnInit {
   submitted = false;
   empresa: any;
   movimientos: any;
+  empresalocal: any;
 
 
 
@@ -39,27 +40,28 @@ export class PosicionConsolidadaComponent implements OnInit {
     this.cuentasForm = this.formBuilder.group({
       cuenta: ['', Validators.required]
     });
+    this.obtenerCuentasEmpresa();
     // this.obtenerEmpresa();
   }
 
   
-  obtenerEmpresa(): void {
-    const currentUserStr = localStorage.getItem('currentUser');
-    if (currentUserStr) {
-      const currentUser = JSON.parse(currentUserStr);
-      this.ordenesService.empresaxGmail(currentUser.email).subscribe(
-        response => {
-          this.empresa = response;
-          this.obtenerCuentasEmpresa(this.empresa.id);
-        },
-        error => {
-          console.error('Error al obtener la empresa:', error);
-        }
-      );
-    } else {
-      console.error('No se encontró currentUser en localStorage.');
-    }
-  }
+  // obtenerEmpresa(): void {
+  //   const currentUserStr = localStorage.getItem('currentUser');
+  //   if (currentUserStr) {
+  //     const currentUser = JSON.parse(currentUserStr);
+  //     this.ordenesService.empresaxGmail(currentUser.email).subscribe(
+  //       response => {
+  //         this.empresa = response;
+  //         this.obtenerCuentasEmpresa(this.empresa.id);
+  //       },
+  //       error => {
+  //         console.error('Error al obtener la empresa:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.error('No se encontró currentUser en localStorage.');
+  //   }
+  // }
 
   cargarCuentas(): void {
     this.cuentasService.cuentasConsultar().subscribe(
@@ -92,16 +94,34 @@ export class PosicionConsolidadaComponent implements OnInit {
     );
   }
 
-  obtenerCuentasEmpresa(idEmpresa: string): void {
-    this.ordenesService.cuentasxempresa(idEmpresa).subscribe(
-      response => {
-        this.cuentas = response;
-      },
-      error => {
-        console.error('Error al obtener las cuentas de la empresa:');
-      }
-    );
+  
+  obtenerCuentasEmpresa(): void {
+    const empresaStr = localStorage.getItem('empresa');
+    if (empresaStr) {
+      this.empresalocal = JSON.parse(empresaStr);
+      this.ordenesService.cuentasxempresa(this.empresalocal[0].id).subscribe(
+        (response) => {
+          this.cuentas = response;
+        },
+        (error) => {
+          console.error('Error al obtener las cuentas de la empresa:', error);
+        }
+      );
+    } else {
+      console.error('No se encontró currentUser en localStorage.');
+    }
   }
+
+  // obtenerCuentasEmpresa(idEmpresa: string): void {
+  //   this.ordenesService.cuentasxempresa(idEmpresa).subscribe(
+  //     response => {
+  //       this.cuentas = response;
+  //     },
+  //     error => {
+  //       console.error('Error al obtener las cuentas de la empresa:');
+  //     }
+  //   );
+  // }
 
 
   cargarReportePosicion(): void {

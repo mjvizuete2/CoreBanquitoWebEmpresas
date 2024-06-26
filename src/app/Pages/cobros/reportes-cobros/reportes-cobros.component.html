@@ -23,7 +23,6 @@
                                     <th scope="col" id="title">Identificación</th>
                                     <th scope="col" id="title">Cuenta del cliente</th>
                                     <th scope="col" id="title">Monto</th>
-                                    <th scope="col" id="title">Fecha de vencimiento</th>
                                     <th scope="col" id="title">Estado</th>
 
                                     <th *ngIf="usuario.rol == 'ADMIN'" scope="col" id="title">Acciones</th>
@@ -37,7 +36,6 @@
                                     <td>{{ cobro.identification }}</td>
                                     <td>{{ cobro.debitAccount }}</td>
                                     <td>{{ cobro.owedAmount }}</td>
-                                    <td>{{ cobro.dueDate }}</td>
                                     <td>{{ cobro.status }}</td>
 
 

@@ -18,6 +18,8 @@ export class CuentasComponent implements OnInit {
   submitted = false;
   empresa: any;
   cuenta: any;
+  empresalocal: any;
+
 
   constructor(
     private cuentasService: CuentasService,
@@ -33,6 +35,7 @@ export class CuentasComponent implements OnInit {
     this.cuentasForm = this.formBuilder.group({
       cuenta: ['', Validators.required]
     });
+    this.obtenerCuentasEmpresa();
     // this.obtenerEmpresa();
 
   }
@@ -41,33 +44,39 @@ export class CuentasComponent implements OnInit {
     return this.cuentasForm.controls;
   }
 
-  obtenerEmpresa(): void {
-    const currentUserStr = localStorage.getItem('currentUser');
-    if (currentUserStr) {
-      const currentUser = JSON.parse(currentUserStr);
-      this.ordenesService.empresaxGmail(currentUser.email).subscribe(
-        response => {
-          this.empresa = response;
-          this.obtenerCuentasEmpresa(this.empresa.id);
+  // obtenerEmpresa(): void {
+  //   const currentUserStr = localStorage.getItem('currentUser');
+  //   if (currentUserStr) {
+  //     const currentUser = JSON.parse(currentUserStr);
+  //     this.ordenesService.empresaxGmail(currentUser.email).subscribe(
+  //       response => {
+  //         this.empresa = response;
+  //         this.obtenerCuentasEmpresa(this.empresa.id);
+  //       },
+  //       error => {
+  //         console.error('Error al obtener la empresa:', error);
+  //       }
+  //     );
+  //   } else {
+  //     console.error('No se encontró currentUser en localStorage.');
+  //   }
+  // }
+
+  obtenerCuentasEmpresa(): void {
+    const empresaStr = localStorage.getItem('empresa');
+    if (empresaStr) {
+      this.empresalocal = JSON.parse(empresaStr);
+      this.ordenesService.cuentasxempresa(this.empresalocal[0].id).subscribe(
+        (response) => {
+          this.cuentas = response;
         },
-        error => {
-          console.error('Error al obtener la empresa:', error);
+        (error) => {
+          console.error('Error al obtener las cuentas de la empresa:', error);
         }
       );
     } else {
       console.error('No se encontró currentUser en localStorage.');
     }
-  }
-
-  obtenerCuentasEmpresa(idEmpresa: string): void {
-    this.ordenesService.cuentasxempresa(idEmpresa).subscribe(
-      response => {
-        this.cuentas = response;
-      },
-      error => {
-        console.error('Error al obtener las cuentas de la empresa:');
-      }
-    );
   }
 
   cargarMovimientosCuentas(countNumber: any): void {

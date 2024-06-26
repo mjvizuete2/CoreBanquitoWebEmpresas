@@ -32,7 +32,7 @@
                                     <th scope="col" id="title">Estado</th>
 
 
-                                    <th *ngIf="usuario.rol == 'ADMIN'" scope="col" id="title">Acciones</th>
+                                    <!-- <th *ngIf="usuario.rol == 'ADMIN'" scope="col" id="title">Acciones</th> -->
 
                                 </tr>
                             </thead>
@@ -47,11 +47,10 @@
                                     <td>{{ cobro.status }}</td>
 
 
-                                    <td *ngIf="usuario.rol == 'ADMIN'">
+                                    <!-- <td *ngIf="usuario.rol == 'ADMIN'">
                                         <button class="btn btn-primary btn-sm mr-2"
                                             (click)="pagarCobro(cobro.id)">Aprobar</button>
-                                        <!-- <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Rechazar</button> -->
-                                    </td>
+                                    </td> -->
 
                                 </tr>
                             </tbody>

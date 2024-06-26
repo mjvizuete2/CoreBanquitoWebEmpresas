@@ -126,7 +126,7 @@ export class ReportesCobrosComponent implements OnInit {
           if (item.status === 'PEN') {
             item.status = 'Pendiente';
           } else if (item.status === 'PAG') {
-            item.status = 'Aprobado';
+            item.status = 'Pagado';
           }
           return item;
         });
@@ -150,7 +150,7 @@ export class ReportesCobrosComponent implements OnInit {
             cobro.identificationType = 'Pasaporte';
           }
           if(cobro.status== 'PAG'){
-            cobro.status='Aprobado'
+            cobro.status='Pagado'
           }else{
              cobro.status='Pendiente'
           }
