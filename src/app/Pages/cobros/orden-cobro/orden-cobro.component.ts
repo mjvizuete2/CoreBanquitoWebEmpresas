@@ -241,7 +241,7 @@ export class OrdenCobroComponent implements OnInit {
             verticalPosition: 'top',
           });
           console.log('Inserciones realizadas con éxito:', result);
-          // window.location.reload();
+          window.location.reload();
 
           // Aquí puedes manejar cualquier lógica adicional después de las inserciones
         },

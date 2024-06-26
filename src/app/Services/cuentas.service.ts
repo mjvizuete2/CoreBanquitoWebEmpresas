@@ -33,12 +33,12 @@ export class CuentasService {
     return this.http.get<any>(`${this.apiUrlTransacciones}/accounts/by-unique-code/${countNumber}`, this.header);
   }
 
-  public transaccion(accountId:any, reference:any, ammount:any, creditorAccount:any, debitorAccount:any, creationDate:any ){
+  public transaccion(accountId:any, reference:any, ammount:any, creditorAccount:any, debitorAccount:any, creationDate:any, transactionType:any ){
     const body = {
       accountId: accountId,
       "codeChannel": "0004",
       "uniqueKey": "clave_unica_001",
-      "transactionType": "DEB",
+      transactionType: transactionType,
       "transactionSubtype": "ADJUSTMENT",
       reference: reference,
       ammount: ammount,

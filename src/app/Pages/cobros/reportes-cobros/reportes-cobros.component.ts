@@ -49,14 +49,15 @@ export class ReportesCobrosComponent implements OnInit {
             console.log('transaccion realizada:', this.idCuenta);
     
             this.ordenesService.recivablesId(res.receivableId ).subscribe(
-              res => {
+              resad => {
                 console.log('transaccion realizada:', this.idCuenta);
         
-                this.ordenesService.accountsId(res.accountId ).subscribe(
+                this.ordenesService.accountsId(resad.accountId ).subscribe(
                   res => {
                     console.log('transaccion realizada:', this.idCuenta);
             
-                    this.cuentasService.transaccion(this.idCuenta, 'ref', cobro.owedAmount, res.accountNumber, cobro.debitAccount, '2024-06-27T12:00:00Z' ).subscribe(
+                    //Quito de la cuenta del cliente
+                    this.cuentasService.transaccion(this.idCuenta, 'ref', cobro.owedAmount, res.accountNumber, cobro.debitAccount, '2024-06-27T12:00:00Z','DEB' ).subscribe(
                       res => {
                         console.log('transaccion realizada:', this.idCuenta);
                 
@@ -65,6 +66,28 @@ export class ReportesCobrosComponent implements OnInit {
                         console.error('Error al realizar la transaccion:', error);
                       }
                     );
+
+                    this.cuentasService.cuenta(res.accountNumber).subscribe(
+                      res => {
+                          //Aumento en la cuenta de la empresa
+                          this.cuentasService.transaccion(res.id, 'ref', cobro.owedAmount,cobro.debitAccount, res.codeUniqueAccount, '2024-06-27T12:00:00Z','CRE' ).subscribe(
+                            res => {
+                              console.log('transaccion realizada:', this.idCuenta);
+                      
+                            },
+                            error => {
+                              console.error('Error al realizar la transaccion:', error);
+                            }
+                          );
+                      },
+                      error => {
+                        console.error('Error al obtener los movimientos de la cuenta:', error);
+                      }
+                    );
+
+
+
+                    
                   },
                   error => {
                     console.error('Error al realizar la transaccion:', error);
@@ -97,7 +120,7 @@ export class ReportesCobrosComponent implements OnInit {
 
     this.cobrosService.aprobarCobro(cobro.id).subscribe(
       (res)=>{
-        // window.location.reload(); 
+        window.location.reload(); 
 
       }, (error) => {
         console.error('Error al cargar cobros:', error);

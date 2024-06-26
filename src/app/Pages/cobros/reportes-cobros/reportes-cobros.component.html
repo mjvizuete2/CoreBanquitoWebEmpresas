@@ -37,14 +37,11 @@
                                     <td>{{ cobro.debitAccount }}</td>
                                     <td>{{ cobro.owedAmount }}</td>
                                     <td>{{ cobro.status }}</td>
-
-
-                                    <td *ngIf="usuario.rol == 'ADMIN'">
-                                        <button class="btn btn-primary btn-sm mr-2"
-                                            (click)="pagarCobro(cobro)">Aprobar</button>
+                            
+                                    <td *ngIf="usuario.rol === 'ADMIN' && cobro.status === 'Pendiente'">
+                                        <button class="btn btn-primary btn-sm mr-2" (click)="pagarCobro(cobro)">Aprobar</button>
                                         <!-- <button class="btn btn-danger btn-sm" (click)="cancelarCobro(cobro)">Rechazar</button> -->
                                     </td>
-
                                 </tr>
                             </tbody>
                         </table>
